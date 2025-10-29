@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Viable URL Media Uploader 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WordPress\n"
+
+msgid "Add media files from URL directly to your WordPress media library with a simple input field and button in the media modal."
+msgstr ""
+
+msgid "Upload from URL"
+msgstr ""
+
+msgid "Uploading..."
+msgstr ""
+
+msgid "File uploaded successfully!"
+msgstr ""
+
+msgid "An error occurred. Please try again."
+msgstr ""
+
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+msgid "Invalid URL provided."
+msgstr ""
+
+msgid "Please provide a URL."
+msgstr ""
+
+msgid "Security check failed."
+msgstr ""
+
+msgid "You do not have permission to upload files."
+msgstr ""
+
+msgid "Please enter a URL"
+msgstr ""
+
+msgid "File URL"
+msgstr ""
+
+msgid "Enter the full URL of the file you want to add to your media library."
+msgstr ""
+
+msgid "Upload File"
+msgstr ""
+
+msgid "How to use"
+msgstr ""
+
+msgid "Find the URL of the file you want to upload"
+msgstr ""
+
+msgid "Paste the URL into the input field above"
+msgstr ""
+
+msgid "Click the \"Upload File\" button"
+msgstr ""
+
+msgid "The file will be downloaded and added to your media library"
+msgstr ""
+
+msgid "Supported file types"
+msgstr ""
+
+msgid "This plugin supports all file types that WordPress can handle:"
+msgstr ""
+
+msgid "Images:"
+msgstr ""
+
+msgid "JPG, PNG, GIF, WebP, SVG"
+msgstr ""
+
+msgid "Videos:"
+msgstr ""
+
+msgid "MP4, WebM, MOV"
+msgstr ""
+
+msgid "Documents:"
+msgstr ""
+
+msgid "PDF, DOC, DOCX, XLS, XLSX"
+msgstr ""
+
+msgid "Audio:"
+msgstr ""
+
+msgid "MP3, WAV, OGG"
+msgstr ""
+
+msgid "Please wait, uploading..."
+msgstr ""
+
+msgid "Error uploading file"
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
+
+msgid "Could not create temporary file."
+msgstr ""
+
+msgid "Could not determine file type."
+msgstr ""
+
+msgid "HTTP error: %s"
+msgstr ""
+
+msgid "Could not verify request nonce"
+msgstr ""
+

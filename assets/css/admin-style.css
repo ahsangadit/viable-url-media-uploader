@@ -1,0 +1,100 @@
+/**
+ * Admin Styles for Viable URL Media Uploader
+ */
+
+/* Upload Container */
+.vumu-upload-container {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.vumu-upload-container h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #23282d;
+    font-size: 1.1em;
+}
+
+/* URL Input Field */
+#vumu-url-input {
+    transition: border-color 0.15s ease-in-out;
+}
+
+#vumu-url-input:focus {
+    border-color: #0073aa;
+    outline: none;
+    box-shadow: 0 0 0 1px #0073aa;
+}
+
+/* Upload Button */
+#vumu-upload-btn {
+    position: relative;
+    transition: background-color 0.15s ease-in-out;
+}
+
+#vumu-upload-btn:hover:not(:disabled) {
+    background-color: #005a87;
+}
+
+#vumu-upload-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Message Display */
+#vumu-message .notice {
+    margin: 10px 0 0 0;
+    padding: 8px 12px;
+    border-left: 4px solid;
+}
+
+#vumu-message .notice-success {
+    background: #d4edda;
+    border-left-color: #46b450;
+    color: #155724;
+}
+
+#vumu-message .notice-error {
+    background: #f8d7da;
+    border-left-color: #dc3232;
+    color: #721c24;
+}
+
+/* Loading Spinner */
+.vumu-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: vumu-spin 0.6s linear infinite;
+}
+
+@keyframes vumu-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Media Modal Tab */
+.vumu-media-tab {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #555;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease-in-out;
+}
+
+.vumu-media-tab:hover {
+    color: #0073aa;
+}
+
+.vumu-media-tab.active {
+    color: #0073aa;
+    border-bottom-color: #0073aa;
+}
+
