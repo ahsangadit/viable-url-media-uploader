@@ -114,8 +114,8 @@ class Viable_URL_Media_Uploader {
      */
     public function add_upload_page() {
         add_media_page(
-            __('Upload from URL', 'viable-url-media-uploader'),
-            __('Upload from URL', 'viable-url-media-uploader'),
+            __('Viable URL Media Uploader', 'viable-url-media-uploader'),
+            __('Viable URL Media Uploader', 'viable-url-media-uploader'),
             'upload_files',
             'vumu-upload-from-url',
             array($this, 'render_upload_page')
