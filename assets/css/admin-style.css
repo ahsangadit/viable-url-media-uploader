@@ -2,99 +2,227 @@
  * Admin Styles for Viable URL Media Uploader
  */
 
-/* Upload Container */
-.vumu-upload-container {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+/* ---------- Global Colors ---------- */
+:root {
+    --vumu-gradient: linear-gradient(90deg, #0073aa, #00d4c5);
+    --vumu-dark: #0073aa;
+    --vumu-light: #00d4c5;
 }
 
-.vumu-upload-container h3 {
-    margin-top: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    color: #23282d;
-    font-size: 1.1em;
+/* ---------- Global Layout ---------- */
+.vumu-admin-wrap {
+    min-height: 100vh;   
+    font-family: "Inter", sans-serif;
+    padding: 60px 20px 100px;
+}
+.media_page_vumu-upload-from-url {
+	background: linear-gradient(135deg, #e8faff 0%, #f5fbff 100%);
+}
+/* ---------- Header ---------- */
+.vumu-header {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
 }
 
-/* URL Input Field */
-#vumu-url-input {
-    transition: border-color 0.15s ease-in-out;
+.vumu-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-#vumu-url-input:focus {
-    border-color: #0073aa;
-    outline: none;
-    box-shadow: 0 0 0 1px #0073aa;
+.vumu-logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0b2545;
 }
 
-/* Upload Button */
+/* ============================
+   Upload Box Styling
+============================ */
+.vumu-upload-box {
+  max-width: 850px;
+  margin: 50px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px 50px;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Gradient border */
+.vumu-upload-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 1.5px;
+  background: var(--vumu-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Title */
+.vumu-upload-box h3,
+.vumu-upload-box h2 {
+  text-align: center;
+  color: var(--vumu-dark);
+  font-weight: 600;
+  margin-bottom: 25px;
+  font-size: 22px;
+}
+
+/* Hide label column */
+.vumu-upload-box .form-table th {
+  display: none;
+}
+
+.vumu-upload-box .form-table td {
+  display: block;
+  text-align: center;
+}
+
+/* Input Field */
+.vumu-upload-box input#vumu-url-input {
+  width: 100%;
+  max-width: 750px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+      background: linear-gradient(#e9e9e9, #e9e9e9) padding-box, var(--vumu-gradient) border-box;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.vumu-upload-box input#vumu-url-input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.15);
+}
+
+/* Description */
+.vumu-upload-box .description {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Submit Button */
+.vumu-upload-box .submit {
+  text-align: center;
+  margin-top: 25px;
+}
+
 #vumu-upload-btn {
-    position: relative;
-    transition: background-color 0.15s ease-in-out;
+  background: var(--vumu-gradient);
+  border: none;
+  color: #fff;
+  padding: 14px 0;
+  width: 100%;
+  max-width: 750px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-#vumu-upload-btn:hover:not(:disabled) {
-    background-color: #005a87;
+#vumu-upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 115, 170, 0.3);
 }
 
-#vumu-upload-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+ 
+/* ---------- Info Section ---------- */
+.vumu-info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 950px;
+  margin: 60px auto 0;
 }
 
-/* Message Display */
-#vumu-message .notice {
-    margin: 10px 0 0 0;
-    padding: 8px 12px;
-    border-left: 4px solid;
+/* ---------- Cards ---------- */
+.vumu-card {
+  flex: 1 1 300px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px 30px;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
 }
 
-#vumu-message .notice-success {
-    background: #d4edda;
-    border-left-color: #46b450;
-    color: #155724;
+/* Gradient border (same for all) */
+.vumu-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: var(--vumu-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
-#vumu-message .notice-error {
-    background: #f8d7da;
-    border-left-color: #dc3232;
-    color: #721c24;
+.vumu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* Loading Spinner */
-.vumu-loading {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    vertical-align: middle;
-    border: 2px solid #fff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: vumu-spin 0.6s linear infinite;
+/* ---------- Icon Circle ---------- */
+.vumu-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--vumu-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 115, 170, 0.25);
 }
 
-@keyframes vumu-spin {
-    to { transform: rotate(360deg); }
+/* ---------- Card Text ---------- */
+.vumu-card h3 {
+  color: #000;
+  text-align: left;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 12px;
 }
 
-/* Media Modal Tab */
-.vumu-media-tab {
-    display: inline-block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #555;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s ease-in-out;
+.vumu-card p,
+.vumu-card li {
+  font-size: 14px;
+  color: #000;
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
 }
 
-.vumu-media-tab:hover {
-    color: #0073aa;
+.vumu-card ul {
+  margin-top: 10px;
+  padding-left: 0;
 }
 
-.vumu-media-tab.active {
-    color: #0073aa;
-    border-bottom-color: #0073aa;
-}
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .vumu-upload-box {
+    padding: 25px;
+  }
 
+  .vumu-info-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
