@@ -36,13 +36,11 @@ With just a **URL**, you can:
 
 * Save the original URL as post meta for reference.
 
-* Upload via the media modal or dedicated upload page.
+* Upload via a clean, dedicated upload page.
 
 Built by **ViableCube**, this plugin is perfect for content creators, developers, and site administrators who need a quick and efficient way to add media files from external sources like CDNs, cloud storage, or stock photo sites.
 
 == Features ==
-
-* **Seamless Media Modal Integration** – Upload option directly in the WordPress media library modal.
 
 * **Dedicated Upload Page** – Standalone upload page accessible from the Media menu.
 
@@ -54,7 +52,7 @@ Built by **ViableCube**, this plugin is perfect for content creators, developers
 
 * **Original URL Storage** – Saves the original source URL as post meta for tracking and reference.
 
-* **AJAX Upload** – Fast, non-blocking uploads with progress feedback.
+* **Standard Form Submission** – Reliable uploads with comprehensive error handling.
 
 * **Automatic File Type Detection** – Intelligently detects file types from URLs and content.
 
@@ -72,13 +70,11 @@ Built by **ViableCube**, this plugin is perfect for content creators, developers
 
 2. Activate the plugin through the **Plugins** menu in WordPress.  
 
-3. Go to any **post/page editor** and click **Add Media**.  
+3. Navigate to **Media → Upload from URL** in the admin menu.  
 
-4. Look for the **Upload from URL** option in the media modal or navigate to **Media → Upload from URL** in the admin menu.  
+4. Paste the URL of the file you want to upload and click **Upload File**.  
 
-5. Paste the URL of the file you want to upload and click **Upload File**.  
-
-6. The file will be automatically added to your media library and ready to use.
+5. The file will be automatically added to your media library and ready to use.
 
 == Frequently Asked Questions ==
 
@@ -116,31 +112,25 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Screenshots ==
 
-1. Upload from URL option integrated into the WordPress media modal interface.  
+1. Dedicated upload page accessible from the Media menu.  
 
-2. Dedicated upload page accessible from the Media menu for standalone uploads.  
+2. URL input field and upload button with clean interface.  
 
-3. URL input field and upload button in the media library modal.  
+3. Success message displayed after a file is uploaded from URL.  
 
-4. Upload progress indicator showing file upload status.  
+4. Uploaded file appearing in the media library with original URL metadata.  
 
-5. Success message displayed after a file is uploaded from URL.  
+5. SVG files displayed correctly in the media library with proper preview.  
 
-6. Uploaded file appearing in the media library with original URL metadata.  
+6. Multiple file types (images, videos, PDFs) successfully imported from URLs.  
 
-7. SVG files displayed correctly in the media library with proper preview.  
-
-8. Multiple file types (images, videos, PDFs) successfully imported from URLs.  
-
-9. Uploaded media ready to be inserted into posts and pages.
+7. Uploaded media ready to be inserted into posts and pages.
 
 == Changelog ==
 
 = 1.0.0 – Initial Release =  
 
 * Added URL-based media upload functionality  
-
-* Added media modal integration with upload option  
 
 * Added dedicated upload page in Media menu  
 
@@ -150,7 +140,7 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 * Added original URL storage as post meta  
 
-* Added AJAX upload with progress feedback  
+* Added standard form submission with error handling  
 
 * Added comprehensive error handling  
 

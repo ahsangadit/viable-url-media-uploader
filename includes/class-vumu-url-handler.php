@@ -3,9 +3,11 @@
  * URL Handler Class
  * Handles downloading files from URLs and saving to WordPress media library
  * 
- * @package Viable_URL_Media_Uploader
+ * @package ahsangadit\viable_url_media_uploader\Admin
  * @author Ahsan Gadit
  */
+
+namespace ahsangadit\viable_url_media_uploader;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -18,7 +20,7 @@ class VUMU_URL_Handler {
      *
      * @param string $url The URL of the file to download
      * @param int $post_id Optional. The post ID to attach the file to
-     * @return int|WP_Error The attachment ID on success, or WP_Error on failure
+     * @return int|\WP_Error The attachment ID on success, or WP_Error on failure
      * @author Ahsan Gadit
      */
     public static function download_and_save($url, $post_id = 0) {
@@ -39,7 +41,7 @@ class VUMU_URL_Handler {
         
         // Check if URL is valid
         if (!wp_http_validate_url($url)) {
-            return new WP_Error('invalid_url', __('Invalid URL provided.', 'viable-url-media-uploader'));
+            return new \WP_Error('invalid_url', __('Invalid URL provided.', 'viable-url-media-uploader'));
         }
         
         // Clean up URL - remove query strings from CDN URLs
@@ -114,7 +116,7 @@ class VUMU_URL_Handler {
      * Download file from URL to temporary location
      *
      * @param string $url URL to download from
-     * @return string|WP_Error Temporary file path or error
+     * @return string|\WP_Error Temporary file path or error
      * @author Ahsan Gadit
      */
     private static function download_file($url) {
@@ -125,20 +127,45 @@ class VUMU_URL_Handler {
         $tmpfname = wp_tempnam($url_filename);
         
         if (!$tmpfname) {
-            return new WP_Error('http_no_file', __('Could not create temporary file.', 'viable-url-media-uploader'));
+            return new \WP_Error('http_no_file', __('Could not create temporary file.', 'viable-url-media-uploader'));
         }
         
-        // Download with custom user agent
+        // Download with custom user agent and headers to avoid 403 errors
         $args = apply_filters('vumu_remote_get_args', array(
             'timeout' => 300, // 5 minutes - increased for large files and slow connections
-            'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+            'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+            'headers' => array(
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language' => 'en-US,en;q=0.9',
+                'Accept-Encoding' => 'gzip, deflate, br',
+                'DNT' => '1',
+                'Connection' => 'keep-alive',
+                'Upgrade-Insecure-Requests' => '1',
+            ),
             'stream' => true,
             'filename' => $tmpfname,
             'redirection' => 5,
-            'blocking' => true
+            'blocking' => true,
+            'sslverify' => false // Some servers have SSL issues
         ));
         
         $response = wp_safe_remote_get($url, $args);
+        
+        // If we get a 403, try with a different user-agent
+        if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) == 403) {
+            @unlink($tmpfname);
+            
+            // Try with a more generic user-agent
+            $args['user-agent'] = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
+            $response = wp_safe_remote_get($url, $args);
+            
+            // If still 403, try with curl-like user-agent
+            if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) == 403) {
+                @unlink($tmpfname);
+                $args['user-agent'] = 'curl/7.68.0';
+                $response = wp_safe_remote_get($url, $args);
+            }
+        }
         
         if (is_wp_error($response)) {
             @unlink($tmpfname);
@@ -149,9 +176,25 @@ class VUMU_URL_Handler {
         
         if (200 !== $response_code) {
             @unlink($tmpfname);
-            return new WP_Error(
+            
+            $error_message = '';
+            switch ($response_code) {
+                case 403:
+                    $error_message = __('Access denied. The server is blocking access to this file. Try using a different URL or contact the site owner.', 'viable-url-media-uploader');
+                    break;
+                case 404:
+                    $error_message = __('File not found. Please check the URL and try again.', 'viable-url-media-uploader');
+                    break;
+                case 500:
+                    $error_message = __('Server error. The remote server encountered an error. Please try again later.', 'viable-url-media-uploader');
+                    break;
+                default:
+                    $error_message = sprintf(__('HTTP error: %s. Unable to download the file.', 'viable-url-media-uploader'), $response_code);
+            }
+            
+            return new \WP_Error(
                 'http_error',
-                sprintf(__('HTTP error: %s', 'viable-url-media-uploader'), $response_code)
+                $error_message
             );
         }
         
@@ -163,7 +206,7 @@ class VUMU_URL_Handler {
      *
      * @param string $tmp_file Temporary file path
      * @param string $url Original URL
-     * @return array|WP_Error File array for media_handle_sideload or error
+     * @return array|\WP_Error File array for media_handle_sideload or error
      * @author Ahsan Gadit
      */
     private static function prepare_file_array($tmp_file, $url) {
@@ -171,7 +214,7 @@ class VUMU_URL_Handler {
         $file_extension = self::get_file_extension($url, $tmp_file);
         
         if (!$file_extension) {
-            return new WP_Error('no_extension', __('Could not determine file type.', 'viable-url-media-uploader'));
+            return new \WP_Error('no_extension', __('Could not determine file type.', 'viable-url-media-uploader'));
         }
         
         $file_array = array();

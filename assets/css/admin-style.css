@@ -10,11 +10,6 @@
 }
 
 /* ---------- Global Layout ---------- */
-.vumu-admin-wrap {
-    min-height: 100vh;   
-    font-family: "Inter", sans-serif;
-    padding: 60px 20px 100px;
-}
 .media_page_vumu-upload-from-url {
 	background: linear-gradient(135deg, #e8faff 0%, #f5fbff 100%);
 }
@@ -70,9 +65,13 @@
 .vumu-upload-box h2 {
   text-align: center;
   color: var(--vumu-dark);
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 25px;
-  font-size: 22px;
+  font-size: 26px;
+  background: linear-gradient(to right, #0073AA 0%, #00D4C5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
 }
 
 /* Hide label column */
@@ -136,6 +135,59 @@
 #vumu-upload-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 115, 170, 0.3);
+}
+
+/* ---------- Custom Messages ---------- */
+.vumu-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
+  overflow: hidden;
+}
+
+.vumu-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--vumu-gradient);
+}
+
+.vumu-message-error {
+  background: linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%);
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.vumu-message-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.vumu-message-content {
+  flex: 1;
+}
+
+.vumu-message-content strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.vumu-message-content p {
+  margin: 0;
+  line-height: 1.5;
 }
 
  

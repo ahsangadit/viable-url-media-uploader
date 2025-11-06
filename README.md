@@ -17,14 +17,14 @@ This plugin is ideal for content creators, developers, and site administrators w
 
 **Key Features:**
 
-- Upload media files directly from URLs via the media modal or dedicated upload page  
+- Upload media files directly from URLs via a dedicated upload page  
 - Supports multiple file types: images (JPG, PNG, GIF, WebP, SVG), videos (MP4, WebM), PDFs, and audio files  
 - Automatic thumbnail generation for uploaded images  
 - Built-in SVG support with proper preview in the media library  
 - Saves original source URL as post meta for tracking and reference  
-- AJAX-powered uploads with progress feedback  
+- Standard form submission with comprehensive error handling  
 - Automatic file type detection from URLs and content  
-- Comprehensive error handling with user-friendly messages  
+- User-friendly interface with clear status messages  
 - Developer-friendly OOP architecture with hooks and filters  
 - Fully translatable and ready for internationalization  
 - Lightweight and optimized for performance  
@@ -33,10 +33,9 @@ This plugin is ideal for content creators, developers, and site administrators w
 
 1. Upload the plugin to `/wp-content/plugins/` or install it from the WordPress plugin repository.  
 2. Activate the plugin through the **Plugins** menu in WordPress.  
-3. Go to any **post/page editor** and click **Add Media**.  
-4. Look for the **Upload from URL** option in the media modal or navigate to **Media → Upload from URL** in the admin menu.  
-5. Paste the URL of the file you want to upload and click **Upload File**.  
-6. The file will be automatically added to your media library and ready to use.
+3. Navigate to **Media → Upload from URL** in the admin menu.  
+4. Paste the URL of the file you want to upload and click **Upload File**.  
+5. The file will be automatically added to your media library and ready to use.
 
 == Frequently Asked Questions ==
 
@@ -66,19 +65,17 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Screenshots ==
 
-1. Upload from URL option integrated into the WordPress media modal interface  
-2. Dedicated upload page accessible from the Media menu for standalone uploads  
-3. URL input field and upload button in the media library modal  
-4. Upload progress indicator showing file upload status  
-5. Success message displayed after a file is uploaded from URL  
-6. Uploaded file appearing in the media library with original URL metadata  
-7. SVG files displayed correctly in the media library with proper preview  
-8. Multiple file types (images, videos, PDFs) successfully imported from URLs
+1. Dedicated upload page accessible from the Media menu  
+2. URL input field and upload button with clean interface  
+3. Success message displayed after a file is uploaded from URL  
+4. Uploaded file appearing in the media library with original URL metadata  
+5. SVG files displayed correctly in the media library with proper preview  
+6. Multiple file types (images, videos, PDFs) successfully imported from URLs
 
 == Changelog ==
 
 = 1.0.0 =  
-* Initial release with URL-based media upload functionality, media modal integration, dedicated upload page, SVG support, automatic thumbnail generation, and developer hooks
+* Initial release with URL-based media upload functionality, dedicated upload page, SVG support, automatic thumbnail generation, and developer hooks
 
 == Upgrade Notice ==
 

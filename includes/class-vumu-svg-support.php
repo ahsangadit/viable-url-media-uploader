@@ -3,9 +3,11 @@
  * SVG Support Class
  * Enables SVG file uploads in WordPress
  * 
- * @package Viable_URL_Media_Uploader
+ * @package ahsangadit\viable_url_media_uploader\Admin
  * @author Ahsan Gadit
  */
+
+namespace ahsangadit\viable_url_media_uploader;
 
 if (!defined('ABSPATH')) {
     exit;

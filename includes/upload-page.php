@@ -2,7 +2,7 @@
 /**
  * Upload Page Template
  *
- * @package Viable_URL_Media_Uploader
+ * @package ahsangadit\viable_url_media_uploader\Admin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,36 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Correct asset path.
 $assets_url = plugin_dir_url( dirname( __FILE__ ) ) . 'assets/image/';
 
-$error   = get_transient( 'vumu_upload_error' );
-$success = get_transient( 'vumu_upload_success' );
+$error = get_transient( 'vumu_upload_error' );
 
 if ( $error ) {
 	delete_transient( 'vumu_upload_error' );
 }
-
-if ( $success ) {
-	delete_transient( 'vumu_upload_success' );
-}
 ?>
 
 <div class="wrap">
-
-	<?php if ( ! empty( $error ) ) : ?>
-		<div class="notice notice-error is-dismissible">
-			<p><?php echo esc_html( $error ); ?></p>
-		</div>
-	<?php endif; ?>
-
-	<?php if ( ! empty( $success ) && is_array( $success ) ) : ?>
-		<div class="notice notice-success is-dismissible">
-			<p>
-				<?php echo esc_html( $success['message'] ); ?>
-				<a href="<?php echo esc_url( $success['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-					<?php esc_html_e( 'View File', 'viable-url-media-uploader' ); ?>
-				</a>
-			</p>
-		</div>
-	<?php endif; ?>
 
 	<!-- ===== HEADER SECTION ===== -->
 	<div class="vumu-header">
@@ -54,6 +32,17 @@ if ( $success ) {
 	<!-- ===== UPLOAD BOX ===== -->
 	<div class="vumu-upload-box">
 		<h2><?php esc_html_e( 'Upload from URL', 'viable-url-media-uploader' ); ?></h2>
+
+		<!-- Custom Message Area -->
+		<?php if ( ! empty( $error ) ) : ?>
+			<div class="vumu-message vumu-message-error">
+				<div class="vumu-message-icon">⚠️</div>
+				<div class="vumu-message-content">
+					<strong><?php esc_html_e( 'Upload Error', 'viable-url-media-uploader' ); ?></strong>
+					<p><?php echo esc_html( $error ); ?></p>
+				</div>
+			</div>
+		<?php endif; ?>
 
 		<form method="post" action="<?php echo esc_url( admin_url( 'upload.php?page=vumu-upload-from-url' ) ); ?>" id="vumu-url-upload-form">
 			<?php wp_nonce_field( 'vumu_upload_nonce', 'vumu_nonce' ); ?>

@@ -3,9 +3,11 @@
  * Upload Handler Class
  * Handles all upload operations
  * 
- * @package Viable_URL_Media_Uploader
+ * @package ahsangadit\viable_url_media_uploader\Admin
  * @author Ahsan Gadit
  */
+
+namespace ahsangadit\viable_url_media_uploader;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -44,7 +46,7 @@ class VUMU_Upload_Handler {
             return;
         }
         
-        if (!class_exists('VUMU_URL_Handler')) {
+        if (!class_exists(__NAMESPACE__ . '\\VUMU_URL_Handler')) {
             require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-url-handler.php';
         }
         
@@ -91,7 +93,7 @@ class VUMU_Upload_Handler {
             ));
         }
         
-        if (!class_exists('VUMU_URL_Handler')) {
+        if (!class_exists(__NAMESPACE__ . '\\VUMU_URL_Handler')) {
             require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-url-handler.php';
         }
         

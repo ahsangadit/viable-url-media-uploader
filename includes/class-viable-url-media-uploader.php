@@ -2,9 +2,11 @@
 /**
  * Main Plugin Class
  * 
- * @package Viable_URL_Media_Uploader
+ * @package ahsangadit\viable_url_media_uploader\Admin
  * @author Ahsan Gadit
  */
+
+namespace ahsangadit\viable_url_media_uploader;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -43,11 +45,9 @@ class Viable_URL_Media_Uploader {
      */
     private function init_hooks() {
         add_action('plugins_loaded', array($this, 'load_textdomain'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_styles'));
         add_action('admin_init', array($this, 'init_upload_handler'));
         add_action('admin_menu', array($this, 'add_upload_page'));
-        add_action('print_media_templates', array($this, 'render_media_template'));
-        add_action('wp_ajax_vumu_upload_from_url', array($this, 'ajax_upload_handler'));
         
         // Enable SVG support
         $this->init_svg_support();
@@ -77,13 +77,13 @@ class Viable_URL_Media_Uploader {
     }
     
     /**
-     * Enqueue admin scripts and styles
+     * Enqueue admin styles
      *
      * @param string $hook Current admin page hook
      * @author Ahsan Gadit
      */
-    public function enqueue_assets($hook) {
-        $allowed_hooks = array('post.php', 'post-new.php', 'upload.php');
+    public function enqueue_styles($hook) {
+        $allowed_hooks = array('media_page_vumu-upload-from-url');
         
         if (!in_array($hook, $allowed_hooks, true)) {
             return;
@@ -95,23 +95,6 @@ class Viable_URL_Media_Uploader {
             array(),
             VUMU_VERSION
         );
-        
-        wp_enqueue_script(
-            'vumu-admin-script',
-            VUMU_PLUGIN_URL . 'assets/js/admin-script.js',
-            array('jquery', 'media-upload'),
-            VUMU_VERSION,
-            true
-        );
-        
-        wp_localize_script('vumu-admin-script', 'vumuData', array(
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('vumu_upload_nonce'),
-            'uploading' => __('Uploading...', 'viable-url-media-uploader'),
-            'success' => __('File uploaded successfully!', 'viable-url-media-uploader'),
-            'error' => __('An error occurred. Please try again.', 'viable-url-media-uploader'),
-            'editUrlBase' => admin_url('post.php?post='),
-        ));
     }
     
     /**
@@ -150,25 +133,6 @@ class Viable_URL_Media_Uploader {
         }
         
         include VUMU_PLUGIN_DIR . 'includes/upload-page.php';
-    }
-    
-    /**
-     * Render media modal template
-     *
-     * @author Ahsan Gadit
-     */
-    public function render_media_template() {
-        include VUMU_PLUGIN_DIR . 'includes/media-template.php';
-    }
-    
-    /**
-     * AJAX handler for URL upload
-     *
-     * @author Ahsan Gadit
-     */
-    public function ajax_upload_handler() {
-        require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-upload-handler.php';
-        VUMU_Upload_Handler::ajax_handle_upload();
     }
 }
 

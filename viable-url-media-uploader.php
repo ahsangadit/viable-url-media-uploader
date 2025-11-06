@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Viable URL Media Uploader
- * Plugin URI: https://github.com/yourusername/viable-url-media-uploader
+ * Plugin URI: https://viablecube.com/viable-url-media-uploader
  * Author: Ahsan Gadit
- * Author URI: https://yourwebsite.com
+ * Author URI: https://github.com/ahsangadit
  * Text Domain: viable-url-media-uploader
  * Domain Path: /languages
  * Version: 1.0.0
@@ -13,8 +13,11 @@
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * 
+ * @package ahsangadit\viable_url_media_uploader
  * @author Ahsan Gadit
  */
+
+namespace ahsangadit\viable_url_media_uploader;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -38,22 +41,4 @@ function vumu_init() {
 }
 
 vumu_init();
-
-/**
- * Enqueue admin CSS only for plugin upload page
- */
-add_action('admin_enqueue_scripts', 'vumu_enqueue_admin_styles');
-function vumu_enqueue_admin_styles($hook) {
-    // The hook name for add_media_page() is "media_page_{slug}"
-    if ($hook !== 'media_page_vumu-upload-from-url') {
-        return;
-    }
-
-    wp_enqueue_style(
-        'vumu-admin-style',
-        VUMU_PLUGIN_URL . 'assets/css/admin-style.css',
-        array(),
-        VUMU_VERSION
-    );
-}
 
