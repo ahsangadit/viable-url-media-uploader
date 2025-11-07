@@ -58,7 +58,7 @@ class VUMU_URL_Handler {
         $file_array = self::prepare_file_array($tmp_file, $url);
         
         if (is_wp_error($file_array)) {
-            @unlink($tmp_file);
+            wp_delete_file($tmp_file);
             return $file_array;
         }
         
@@ -67,7 +67,7 @@ class VUMU_URL_Handler {
         
         // Clean up if error
         if (is_wp_error($attachment_id)) {
-            @unlink($file_array['tmp_name']);
+            wp_delete_file($file_array['tmp_name']);
             return $attachment_id;
         }
         
@@ -153,7 +153,7 @@ class VUMU_URL_Handler {
         
         // If we get a 403, try with a different user-agent
         if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) == 403) {
-            @unlink($tmpfname);
+            wp_delete_file($tmpfname);
             
             // Try with a more generic user-agent
             $args['user-agent'] = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
@@ -161,21 +161,21 @@ class VUMU_URL_Handler {
             
             // If still 403, try with curl-like user-agent
             if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) == 403) {
-                @unlink($tmpfname);
+                wp_delete_file($tmpfname);
                 $args['user-agent'] = 'curl/7.68.0';
                 $response = wp_safe_remote_get($url, $args);
             }
         }
         
         if (is_wp_error($response)) {
-            @unlink($tmpfname);
+            wp_delete_file($tmpfname);
             return $response;
         }
         
         $response_code = wp_remote_retrieve_response_code($response);
         
         if (200 !== $response_code) {
-            @unlink($tmpfname);
+            wp_delete_file($tmpfname);
             
             $error_message = '';
             switch ($response_code) {
@@ -189,6 +189,7 @@ class VUMU_URL_Handler {
                     $error_message = __('Server error. The remote server encountered an error. Please try again later.', 'viable-url-media-uploader');
                     break;
                 default:
+                    // translators: %s: HTTP response code (e.g., 403, 404, 500)
                     $error_message = sprintf(__('HTTP error: %s. Unable to download the file.', 'viable-url-media-uploader'), $response_code);
             }
             
@@ -225,13 +226,13 @@ class VUMU_URL_Handler {
         if (!isset($path['extension']) || strtolower($path['extension']) !== $ext_lower) {
             // Rename temp file to have correct extension
             $new_tmp_file = $tmp_file . $file_extension;
-            if (@rename($tmp_file, $new_tmp_file)) {
+            // Use copy and delete instead of rename for WordPress compatibility
+            if (@copy($tmp_file, $new_tmp_file)) {
                 $file_array['tmp_name'] = $new_tmp_file;
+                wp_delete_file($tmp_file);
             } else {
-                // If rename fails, copy the file
-                @copy($tmp_file, $new_tmp_file);
-                $file_array['tmp_name'] = $new_tmp_file;
-                @unlink($tmp_file);
+                // If copy fails, use original file
+                $file_array['tmp_name'] = $tmp_file;
             }
         } else {
             $file_array['tmp_name'] = $tmp_file;
@@ -263,7 +264,8 @@ class VUMU_URL_Handler {
      */
     private static function get_file_extension($url, $file_path = '') {
         // First try to get extension from URL (most reliable)
-        $url_ext = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
+        $parsed_url = wp_parse_url($url, PHP_URL_PATH);
+        $url_ext = pathinfo($parsed_url, PATHINFO_EXTENSION);
         if ($url_ext) {
             $url_ext = strtolower($url_ext);
             // Handle SVG and SVGZ
@@ -321,4 +323,3 @@ class VUMU_URL_Handler {
         return isset($mime_types[$extension]) ? $mime_types[$extension] : 'application/octet-stream';
     }
 }
-

@@ -31,7 +31,7 @@ class VUMU_Upload_Handler {
             return;
         }
         
-        if (!isset($_POST['vumu_nonce']) || !wp_verify_nonce($_POST['vumu_nonce'], 'vumu_upload_nonce')) {
+        if (!isset($_POST['vumu_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['vumu_nonce'])), 'vumu_upload_nonce')) {
             return;
         }
         
@@ -39,7 +39,7 @@ class VUMU_Upload_Handler {
             return;
         }
         
-        $url = esc_url_raw($_POST['vumu_url']);
+        $url = esc_url_raw(wp_unslash($_POST['vumu_url']));
         
         if (!wp_http_validate_url($url)) {
             set_transient('vumu_upload_error', __('Invalid URL provided.', 'viable-url-media-uploader'), 30);
@@ -73,7 +73,7 @@ class VUMU_Upload_Handler {
             ));
         }
         
-        if (!isset($_POST['vumu_nonce']) || !wp_verify_nonce($_POST['vumu_nonce'], 'vumu_upload_nonce')) {
+        if (!isset($_POST['vumu_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['vumu_nonce'])), 'vumu_upload_nonce')) {
             wp_send_json_error(array(
                 'message' => __('Security check failed.', 'viable-url-media-uploader')
             ));
@@ -85,7 +85,7 @@ class VUMU_Upload_Handler {
             ));
         }
         
-        $url = esc_url_raw($_POST['vumu_url']);
+        $url = esc_url_raw(wp_unslash($_POST['vumu_url']));
         
         if (!wp_http_validate_url($url)) {
             wp_send_json_error(array(
@@ -112,4 +112,3 @@ class VUMU_Upload_Handler {
         ));
     }
 }
-

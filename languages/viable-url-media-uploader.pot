@@ -18,19 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: WordPress\n"
 
-msgid "Add media files from URL directly to your WordPress media library with a simple input field and button in the media modal."
-msgstr ""
-
 msgid "Upload from URL"
-msgstr ""
-
-msgid "Uploading..."
-msgstr ""
-
-msgid "File uploaded successfully!"
-msgstr ""
-
-msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "You do not have sufficient permissions to access this page."
@@ -48,9 +36,6 @@ msgstr ""
 msgid "You do not have permission to upload files."
 msgstr ""
 
-msgid "Please enter a URL"
-msgstr ""
-
 msgid "File URL"
 msgstr ""
 
@@ -63,16 +48,16 @@ msgstr ""
 msgid "How to use"
 msgstr ""
 
-msgid "Find the URL of the file you want to upload"
+msgid "Find the URL of the file you want to upload."
 msgstr ""
 
-msgid "Paste the URL into the input field above"
+msgid "Paste the URL into the input field above."
 msgstr ""
 
-msgid "Click the \"Upload File\" button"
+msgid "Click the \"Upload File\" button."
 msgstr ""
 
-msgid "The file will be downloaded and added to your media library"
+msgid "The file will be downloaded and added to your media library."
 msgstr ""
 
 msgid "Supported file types"
@@ -84,34 +69,13 @@ msgstr ""
 msgid "Images:"
 msgstr ""
 
-msgid "JPG, PNG, GIF, WebP, SVG"
-msgstr ""
-
 msgid "Videos:"
-msgstr ""
-
-msgid "MP4, WebM, MOV"
 msgstr ""
 
 msgid "Documents:"
 msgstr ""
 
-msgid "PDF, DOC, DOCX, XLS, XLSX"
-msgstr ""
-
 msgid "Audio:"
-msgstr ""
-
-msgid "MP3, WAV, OGG"
-msgstr ""
-
-msgid "Please wait, uploading..."
-msgstr ""
-
-msgid "Error uploading file"
-msgstr ""
-
-msgid "An error occurred"
 msgstr ""
 
 msgid "Could not create temporary file."
@@ -120,9 +84,27 @@ msgstr ""
 msgid "Could not determine file type."
 msgstr ""
 
-msgid "HTTP error: %s"
+msgid "Viable URL Media Uploader"
 msgstr ""
 
-msgid "Could not verify request nonce"
+msgid "Plugin Logo"
+msgstr ""
+
+msgid "Upload Error"
+msgstr ""
+
+msgid "Supported File Types"
+msgstr ""
+
+msgid "Access denied. The server is blocking access to this file. Try using a different URL or contact the site owner."
+msgstr ""
+
+msgid "File not found. Please check the URL and try again."
+msgstr ""
+
+msgid "Server error. The remote server encountered an error. Please try again later."
+msgstr ""
+
+msgid "HTTP error: %s. Unable to download the file."
 msgstr ""
 

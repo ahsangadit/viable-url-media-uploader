@@ -41,4 +41,3 @@ function vumu_init() {
 }
 
 vumu_init();
-

@@ -4,7 +4,7 @@ Contributors: viablecube, ahsangadit
 
 Donate link: https://viablecube.com/docs/viable-url-media-uploader/?utm_source=vumu&utm_medium=donate-link
 
-Tags: media, upload, url, media library, files, import, images, videos, pdfs, svg
+Tags: media, upload, media uploader, attachment, url,
 
 Requires at least: 5.0
 
@@ -12,13 +12,13 @@ Tested up to: 6.8
 
 Stable tag: 1.0.0
 
-Requires PHP: 7.2
+Requires PHP: 7.0
 
 License: GPLv2 or later
 
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Import media files directly from URLs into your WordPress media library — no download needed. Simply paste the URL and upload images, videos, PDFs, and more.
+Media uploader that adds attachments from URLs to your WordPress media library. Upload images, videos, PDFs, and more with just a URL.
 
 == Description ==
 

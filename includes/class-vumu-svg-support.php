@@ -85,4 +85,3 @@ class VUMU_SVG_Support {
         </style>';
     }
 }
-

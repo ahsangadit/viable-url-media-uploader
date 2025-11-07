@@ -44,7 +44,6 @@ class Viable_URL_Media_Uploader {
      * @author Ahsan Gadit
      */
     private function init_hooks() {
-        add_action('plugins_loaded', array($this, 'load_textdomain'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_styles'));
         add_action('admin_init', array($this, 'init_upload_handler'));
         add_action('admin_menu', array($this, 'add_upload_page'));
@@ -61,19 +60,6 @@ class Viable_URL_Media_Uploader {
     private function init_svg_support() {
         require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-svg-support.php';
         VUMU_SVG_Support::init();
-    }
-    
-    /**
-     * Load plugin textdomain for translations
-     *
-     * @author Ahsan Gadit
-     */
-    public function load_textdomain() {
-        load_plugin_textdomain(
-            'viable-url-media-uploader',
-            false,
-            dirname(dirname(plugin_basename(__FILE__))) . '/languages'
-        );
     }
     
     /**
@@ -114,8 +100,8 @@ class Viable_URL_Media_Uploader {
      */
     public function add_upload_page() {
         add_media_page(
-            __('Viable URL Media Uploader', 'viable-url-media-uploader'),
-            __('Viable URL Media Uploader', 'viable-url-media-uploader'),
+            __('Viable URL Media', 'viable-url-media-uploader'),
+            __('Viable URL Media', 'viable-url-media-uploader'),
             'upload_files',
             'vumu-upload-from-url',
             array($this, 'render_upload_page')
@@ -129,10 +115,9 @@ class Viable_URL_Media_Uploader {
      */
     public function render_upload_page() {
         if (!current_user_can('upload_files')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'viable-url-media-uploader'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'viable-url-media-uploader'));
         }
         
         include VUMU_PLUGIN_DIR . 'includes/upload-page.php';
     }
 }
-
