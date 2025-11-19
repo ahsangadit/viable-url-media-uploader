@@ -278,3 +278,14 @@
     gap: 20px;
   }
 }
+
+/* ---------- Hide Admin Notices from Other Plugins ---------- */
+.media_page_vumu-upload-from-url .notice:not(.vumu-message):not(.vumu-message-error):not(.vumu-message-success):not(.vumu-message-warning):not(.vumu-message-info),
+.media_page_vumu-upload-from-url .notice-error:not(.vumu-message-error),
+.media_page_vumu-upload-from-url .notice-success:not(.vumu-message-success),
+.media_page_vumu-upload-from-url .notice-warning:not(.vumu-message-warning),
+.media_page_vumu-upload-from-url .notice-info:not(.vumu-message-info),
+.media_page_vumu-upload-from-url .update-nag,
+.media_page_vumu-upload-from-url .updated {
+  display: none !important;
+}

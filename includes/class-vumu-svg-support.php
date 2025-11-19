@@ -27,8 +27,8 @@ class VUMU_SVG_Support {
         // Fix SVG display in media library
         add_filter('wp_prepare_attachment_for_js', array(__CLASS__, 'fix_svg_media_library'), 10, 3);
         
-        // Fix SVG preview in media library
-        add_action('admin_head', array(__CLASS__, 'svg_admin_style'));
+        // Enqueue SVG admin styles using WordPress 5.7+ best practices
+        add_action('admin_enqueue_scripts', array(__CLASS__, 'enqueue_svg_admin_styles'));
     }
     
     /**
@@ -70,18 +70,58 @@ class VUMU_SVG_Support {
     }
     
     /**
-     * Add admin styles for SVG preview
+     * Enqueue admin styles for SVG preview using WordPress 5.7+ best practices
      *
+     * @param string $hook Current admin page hook
      * @author Ahsan Gadit
      */
-    public static function svg_admin_style() {
-        echo '<style>
+    public static function enqueue_svg_admin_styles($hook) {
+        // Enqueue on media library pages and post edit pages (where media modal is used)
+        $allowed_hooks = array(
+            'upload.php',
+            'post.php',
+            'post-new.php',
+            'media_page_vumu-upload-from-url'
+        );
+        
+        // Also allow on any admin page where media library might be accessed
+        $screen = get_current_screen();
+        $should_enqueue = false;
+        
+        // Check if current hook is in allowed list
+        if (in_array($hook, $allowed_hooks, true)) {
+            $should_enqueue = true;
+        }
+        
+        // Also enqueue on attachment edit pages
+        if ($screen && 'attachment' === $screen->post_type) {
+            $should_enqueue = true;
+        }
+        
+        if (!$should_enqueue) {
+            return;
+        }
+        
+        // Register and enqueue a style handle for SVG support
+        wp_register_style(
+            'vumu-svg-admin-style',
+            false,
+            array(),
+            VUMU_VERSION
+        );
+        
+        wp_enqueue_style('vumu-svg-admin-style');
+        
+        // Add inline styles using wp_add_inline_style (WordPress 5.7+ best practice)
+        $svg_css = '
             .attachment-266x266, .thumbnail img[src$=".svg"],
             img[src$=".svg"].attachment-post-thumbnail,
             .media-icon img[src$=".svg"] {
                 width: 100% !important;
                 height: auto !important;
             }
-        </style>';
+        ';
+        
+        wp_add_inline_style('vumu-svg-admin-style', $svg_css);
     }
 }

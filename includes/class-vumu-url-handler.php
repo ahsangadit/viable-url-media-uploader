@@ -132,7 +132,7 @@ class VUMU_URL_Handler {
         
         // Download with custom user agent and headers to avoid 403 errors
         $args = apply_filters('vumu_remote_get_args', array(
-            'timeout' => 300, // 5 minutes - increased for large files and slow connections
+            'timeout' => 300,
             'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
             'headers' => array(
                 'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -146,7 +146,7 @@ class VUMU_URL_Handler {
             'filename' => $tmpfname,
             'redirection' => 5,
             'blocking' => true,
-            'sslverify' => false // Some servers have SSL issues
+            'sslverify' => false
         ));
         
         $response = wp_safe_remote_get($url, $args);
@@ -189,7 +189,6 @@ class VUMU_URL_Handler {
                     $error_message = __('Server error. The remote server encountered an error. Please try again later.', 'viable-url-media-uploader');
                     break;
                 default:
-                    // translators: %s: HTTP response code (e.g., 403, 404, 500)
                     $error_message = sprintf(__('HTTP error: %s. Unable to download the file.', 'viable-url-media-uploader'), $response_code);
             }
             

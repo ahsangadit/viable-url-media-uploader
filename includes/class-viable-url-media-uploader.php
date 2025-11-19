@@ -48,6 +48,9 @@ class Viable_URL_Media_Uploader {
         add_action('admin_init', array($this, 'init_upload_handler'));
         add_action('admin_menu', array($this, 'add_upload_page'));
         
+        // Hide admin notices from other plugins on upload page
+        add_action('admin_init', array($this, 'remove_admin_notices'), 999);
+        
         // Enable SVG support
         $this->init_svg_support();
     }
@@ -106,6 +109,23 @@ class Viable_URL_Media_Uploader {
             'vumu-upload-from-url',
             array($this, 'render_upload_page')
         );
+    }
+    
+    /**
+     * Remove admin notices from other plugins on upload page
+     * Runs in admin_init with high priority to remove notices before they're displayed
+     *
+     * @author Ahsan Gadit
+     */
+    public function remove_admin_notices() {
+        global $pagenow;
+        
+        // Only remove notices on our upload page
+        if ('upload.php' === $pagenow && isset($_GET['page']) && 'vumu-upload-from-url' === $_GET['page']) {
+            // Remove all admin notices actions
+            remove_all_actions('admin_notices');
+            remove_all_actions('all_admin_notices');
+        }
     }
     
     /**

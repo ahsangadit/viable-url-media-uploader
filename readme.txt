@@ -90,11 +90,15 @@ Yes, as long as the URL is publicly accessible and the file can be downloaded by
 
 The plugin will upload the file even if it already exists in your media library. You can add deduplication logic using the provided filters.
 
-= Can I customize the upload process? =  
+= Can I customize the upload process? =
 
 Yes. Use the `vumu_remote_get_args` filter to modify download parameters like timeout, user agent, headers, and more. You can also use `vumu_before_upload` and `vumu_after_upload` action hooks to execute custom code during the upload process.
 
-= Does it work with SVG files? =  
+= How does the plugin handle servers that block downloads? =
+
+The plugin uses a fallback mechanism to handle servers that block standard browser requests. If a server returns a 403 (Forbidden) error, the plugin will automatically retry the download with alternative user agents, including a generic browser user agent and, as a last resort, a Googlebot user agent string. This helps bypass some server restrictions that block non-browser requests. **Important:** Impersonating search engine crawlers may violate some websites' terms of service. Use this feature responsibly and only download files from sources you have permission to access. You can customize or disable this behavior using the `vumu_remote_get_args` filter.
+
+= Does it work with SVG files? =
 
 Yes. The plugin includes built-in SVG support, allowing you to upload SVG files and view them properly in the WordPress media library.
 
