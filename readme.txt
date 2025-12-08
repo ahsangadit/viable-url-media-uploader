@@ -4,11 +4,11 @@ Contributors: viablecube, ahsangadit
 
 Donate link: https://viablecube.com/docs/viable-url-media-uploader/?utm_source=vumu&utm_medium=donate-link
 
-Tags: media, upload, media uploader, attachment, url,
+Tags: media, upload, media uploader, attachment, url
 
-Requires at least: 5.0
+Requires at least: 5.6.0
 
-Tested up to: 6.8
+Tested up to: 6.9
 
 Stable tag: 1.0.0
 
@@ -22,9 +22,9 @@ Media uploader that adds attachments from URLs to your WordPress media library. 
 
 == Description ==
 
-[📘 Documentation](https://viablecube.com/docs/viable-url-media-uploader/?utm_source=vumu&utm_medium=readme-docs) | [💬 Support](mailto:ahsan@viablecube.com)
-
 **Viable URL Media Uploader** allows you to quickly import media files directly from URLs into your WordPress media library without downloading them to your computer first.
+
+https://youtu.be/ChxShlJ3YNw
 
 With just a **URL**, you can:
 
@@ -58,12 +58,6 @@ Built by **ViableCube**, this plugin is perfect for content creators, developers
 
 * **Error Handling** – Comprehensive error handling with user-friendly messages.
 
-* **Developer-Friendly** – OOP-based architecture with hooks and filters for customization.
-
-* **Fully Translatable** – Ready for translation into any language.
-
-* **Lightweight & Optimized** – Minimal performance impact with efficient code structure.
-
 == Installation ==
 
 1. Upload the plugin to `/wp-content/plugins/` or install it directly from the WordPress Plugin Directory.  
@@ -90,10 +84,6 @@ Yes, as long as the URL is publicly accessible and the file can be downloaded by
 
 The plugin will upload the file even if it already exists in your media library. You can add deduplication logic using the provided filters.
 
-= Can I customize the upload process? =
-
-Yes. Use the `vumu_remote_get_args` filter to modify download parameters like timeout, user agent, headers, and more. You can also use `vumu_before_upload` and `vumu_after_upload` action hooks to execute custom code during the upload process.
-
 = How does the plugin handle servers that block downloads? =
 
 The plugin uses a fallback mechanism to handle servers that block standard browser requests. If a server returns a 403 (Forbidden) error, the plugin will automatically retry the download with alternative user agents, including a generic browser user agent and, as a last resort, a Googlebot user agent string. This helps bypass some server restrictions that block non-browser requests. **Important:** Impersonating search engine crawlers may violate some websites' terms of service. Use this feature responsibly and only download files from sources you have permission to access. You can customize or disable this behavior using the `vumu_remote_get_args` filter.
@@ -113,22 +103,6 @@ Yes. The original URL is saved as post meta for each uploaded file, allowing you
 = Is the plugin compatible with multisite? =  
 
 Yes. The plugin works in both single-site and multisite WordPress installations.
-
-== Screenshots ==
-
-1. Dedicated upload page accessible from the Media menu.  
-
-2. URL input field and upload button with clean interface.  
-
-3. Success message displayed after a file is uploaded from URL.  
-
-4. Uploaded file appearing in the media library with original URL metadata.  
-
-5. SVG files displayed correctly in the media library with proper preview.  
-
-6. Multiple file types (images, videos, PDFs) successfully imported from URLs.  
-
-7. Uploaded media ready to be inserted into posts and pages.
 
 == Changelog ==
 
