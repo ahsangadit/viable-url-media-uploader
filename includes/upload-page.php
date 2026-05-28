@@ -13,9 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 $assets_url = plugin_dir_url( dirname( __FILE__ ) ) . 'assets/image/';
 
 $error = get_transient( 'vumu_upload_error' );
+$success = get_transient( 'vumu_upload_success' );
 
 if ( $error ) {
 	delete_transient( 'vumu_upload_error' );
+}
+
+if ( $success ) {
+	delete_transient( 'vumu_upload_success' );
 }
 ?>
 
@@ -29,11 +34,24 @@ if ( $error ) {
 		</div>
 	</div>
 
+	<div class="vumu-page-layout">
+		<div class="vumu-main-content">
+
 	<!-- ===== UPLOAD BOX ===== -->
 	<div class="vumu-upload-box">
 		<h2><?php esc_html_e( 'Upload from URL', 'viable-url-media-uploader' ); ?></h2>
 
 		<!-- Custom Message Area -->
+		<?php if ( ! empty( $success ) ) : ?>
+			<div class="vumu-message vumu-message-success">
+				<div class="vumu-message-icon">✅</div>
+				<div class="vumu-message-content">
+					<strong><?php esc_html_e( 'Upload Complete', 'viable-url-media-uploader' ); ?></strong>
+					<p><?php echo esc_html( $success ); ?></p>
+				</div>
+			</div>
+		<?php endif; ?>
+
 		<?php if ( ! empty( $error ) ) : ?>
 			<div class="vumu-message vumu-message-error">
 				<div class="vumu-message-icon">⚠️</div>
@@ -47,33 +65,48 @@ if ( $error ) {
 		<form method="post" action="<?php echo esc_url( admin_url( 'upload.php?page=vumu-upload-from-url' ) ); ?>" id="vumu-url-upload-form">
 			<?php wp_nonce_field( 'vumu_upload_nonce', 'vumu_nonce' ); ?>
 
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th scope="row">
-							<label for="vumu-url-input"><?php esc_html_e( 'File URL', 'viable-url-media-uploader' ); ?></label>
-						</th>
-						<td>
-							<input 
-								type="url" 
-								name="vumu_url" 
-								id="vumu-url-input" 
-								class="regular-text" 
-								placeholder="Enter Image URL"
-								required
-								autofocus
-							/>
-							<p class="description">
-								<?php esc_html_e( 'Enter the full URL of the file you want to add to your media library.', 'viable-url-media-uploader' ); ?>
-							</p>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<?php if ( vumu_is_pro_active() ) : ?>
+				<?php do_action( 'vumu_render_pro_upload_form' ); ?>
+			<?php else : ?>
+				<table class="form-table">
+					<tbody>
+						<tr>
+							<th scope="row">
+								<label for="vumu-url-input"><?php esc_html_e( 'File URL', 'viable-url-media-uploader' ); ?></label>
+							</th>
+							<td>
+								<input
+									type="url"
+									name="vumu_url"
+									id="vumu-url-input"
+									class="regular-text"
+									placeholder="<?php esc_attr_e( 'Enter Image URL', 'viable-url-media-uploader' ); ?>"
+									required
+									autofocus
+								/>
+								<p class="description">
+									<?php esc_html_e( 'Enter the full URL of the file you want to add to your media library.', 'viable-url-media-uploader' ); ?>
+								</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<?php
+				require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-pro-upsell.php';
+				\ahsangadit\viable_url_media_uploader\VUMU_Pro_Upsell::render();
+				?>
+			<?php endif; ?>
 
 			<p class="submit">
 				<button type="submit" class="button button-primary button-large" id="vumu-upload-btn">
-					<?php esc_html_e( 'Upload File', 'viable-url-media-uploader' ); ?>
+					<?php
+					if ( vumu_is_pro_active() ) {
+						esc_html_e( 'Upload All Files', 'viable-url-media-uploader' );
+					} else {
+						esc_html_e( 'Upload File', 'viable-url-media-uploader' );
+					}
+					?>
 				</button>
 			</p>
 		</form>
@@ -112,4 +145,14 @@ if ( $error ) {
 		</div>
 
 	</div>
+
+		</div><!-- .vumu-main-content -->
+
+		<aside class="vumu-sidebar">
+			<?php
+			require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-footer-boxes.php';
+			\ahsangadit\viable_url_media_uploader\VUMU_Footer_Boxes::render();
+			?>
+		</aside>
+	</div><!-- .vumu-page-layout -->
 </div>

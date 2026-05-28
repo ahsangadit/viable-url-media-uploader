@@ -84,6 +84,28 @@ class Viable_URL_Media_Uploader {
             array(),
             VUMU_VERSION
         );
+
+        if ( ! \vumu_is_pro_active() ) {
+            wp_enqueue_script(
+                'vumu-pro-upsell',
+                VUMU_PLUGIN_URL . 'assets/js/pro-upsell.js',
+                array(),
+                VUMU_VERSION,
+                true
+            );
+
+            wp_localize_script(
+                'vumu-pro-upsell',
+                'vumuProUpsell',
+                array(
+                    'upgradeUrl' => apply_filters(
+                        'vumu_pro_upgrade_url',
+                        'https://viablecube.com/viable-url-media-uploader-pro/?utm_source=vumu&utm_medium=plugin-upsell&utm_campaign=upgrade'
+                    ),
+                    'tooltip'    => __( 'Multiple URL upload is available in Pro. Click to learn more.', 'viable-url-media-uploader' ),
+                )
+            );
+        }
     }
     
     /**
@@ -92,6 +114,7 @@ class Viable_URL_Media_Uploader {
      * @author Ahsan Gadit
      */
     public function init_upload_handler() {
+        require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-url-handler.php';
         require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-upload-handler.php';
         VUMU_Upload_Handler::handle_upload();
     }

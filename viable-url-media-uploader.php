@@ -28,7 +28,8 @@ define('VUMU_VERSION', '1.0.0');
 define('VUMU_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('VUMU_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// Include main plugin class
+// Include helpers and main plugin class.
+require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-helpers.php';
 require_once VUMU_PLUGIN_DIR . 'includes/class-viable-url-media-uploader.php';
 
 /**

@@ -35,6 +35,11 @@ class VUMU_Upload_Handler {
             return;
         }
         
+        // Batch uploads are handled by the Pro plugin.
+        if ( \vumu_is_pro_active() && isset( $_POST['vumu_urls'] ) ) {
+            return;
+        }
+
         if (!isset($_POST['vumu_url']) || empty($_POST['vumu_url'])) {
             return;
         }
