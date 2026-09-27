@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Correct asset path.
-$assets_url = plugin_dir_url( dirname( __FILE__ ) ) . 'assets/image/';
+$vumu_assets_url = plugin_dir_url( dirname( __FILE__ ) ) . 'assets/image/';
 
 $error = get_transient( 'vumu_upload_error' );
 
@@ -24,7 +24,7 @@ if ( $error ) {
 	<!-- ===== HEADER SECTION ===== -->
 	<div class="vumu-header">
 		<div class="vumu-logo">
-			<img src="<?php echo esc_url( $assets_url . 'main_logo.svg' ); ?>" alt="<?php esc_attr_e( 'Plugin Logo', 'viable-url-media-uploader' ); ?>" width="65" height="65">
+			<img src="<?php echo esc_url( $vumu_assets_url . 'main_logo.svg' ); ?>" alt="<?php esc_attr_e( 'Plugin Logo', 'viable-url-media-uploader' ); ?>" width="65" height="65">
 			<h1><?php esc_html_e( 'Viable URL Media Uploader', 'viable-url-media-uploader' ); ?></h1>
 		</div>
 	</div>
@@ -85,7 +85,7 @@ if ( $error ) {
 		<!-- Card 1 -->
 		<div class="vumu-card">
 			<div class="vumu-icon-circle">
-				<img src="<?php echo esc_url( $assets_url . 'How-to-use.svg' ); ?>" alt="<?php esc_attr_e( 'How to use', 'viable-url-media-uploader' ); ?>" width="40" height="40">
+				<img src="<?php echo esc_url( $vumu_assets_url . 'How-to-use.svg' ); ?>" alt="<?php esc_attr_e( 'How to use', 'viable-url-media-uploader' ); ?>" width="40" height="40">
 			</div>
 			<h3><?php esc_html_e( 'How to use', 'viable-url-media-uploader' ); ?></h3>
 			<ol>
@@ -99,7 +99,7 @@ if ( $error ) {
 		<!-- Card 2 -->
 		<div class="vumu-card">
 			<div class="vumu-icon-circle">
-				<img src="<?php echo esc_url( $assets_url . 'Supported.svg' ); ?>" alt="<?php esc_attr_e( 'Supported File Types', 'viable-url-media-uploader' ); ?>" width="40" height="40">
+				<img src="<?php echo esc_url( $vumu_assets_url . 'Supported.svg' ); ?>" alt="<?php esc_attr_e( 'Supported File Types', 'viable-url-media-uploader' ); ?>" width="40" height="40">
 			</div>
 			<h3><?php esc_html_e( 'Supported file types', 'viable-url-media-uploader' ); ?></h3>
 			<p><?php esc_html_e( 'This plugin supports all file types that WordPress can handle:', 'viable-url-media-uploader' ); ?></p>

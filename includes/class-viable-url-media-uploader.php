@@ -61,6 +61,7 @@ class Viable_URL_Media_Uploader {
      * @author Ahsan Gadit
      */
     private function init_svg_support() {
+        require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-svg-sanitizer.php';
         require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-svg-support.php';
         VUMU_SVG_Support::init();
     }
@@ -120,8 +121,10 @@ class Viable_URL_Media_Uploader {
     public function remove_admin_notices() {
         global $pagenow;
         
-        // Only remove notices on our upload page
-        if ('upload.php' === $pagenow && isset($_GET['page']) && 'vumu-upload-from-url' === $_GET['page']) {
+        // Only remove notices on our upload page.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page slug check; no form processing.
+        $current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+        if ('upload.php' === $pagenow && 'vumu-upload-from-url' === $current_page) {
             // Remove all admin notices actions
             remove_all_actions('admin_notices');
             remove_all_actions('all_admin_notices');

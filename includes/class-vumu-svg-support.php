@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 class VUMU_SVG_Support {
-    
+
     /**
      * Initialize SVG support
      *
@@ -23,6 +23,10 @@ class VUMU_SVG_Support {
     public static function init() {
         // Allow SVG uploads
         add_filter('upload_mimes', array(__CLASS__, 'add_svg_mime_types'), 10, 1);
+
+        // Sanitize SVG uploads before they are saved
+        add_filter('wp_handle_upload_prefilter', array(__CLASS__, 'sanitize_svg_upload'));
+        add_filter('wp_handle_sideload_prefilter', array(__CLASS__, 'sanitize_svg_upload'));
         
         // Fix SVG display in media library
         add_filter('wp_prepare_attachment_for_js', array(__CLASS__, 'fix_svg_media_library'), 10, 3);
@@ -42,6 +46,28 @@ class VUMU_SVG_Support {
         $mimes['svg'] = 'image/svg+xml';
         $mimes['svgz'] = 'image/svg+xml';
         return $mimes;
+    }
+
+    /**
+     * Sanitize SVG files during upload and sideload.
+     *
+     * @param array $file Upload file array.
+     * @return array Modified upload file array.
+     */
+    public static function sanitize_svg_upload($file) {
+        if (!isset($file['tmp_name'], $file['type'])) {
+            return $file;
+        }
+
+        if (!VUMU_SVG_Sanitizer::is_svg_file($file['tmp_name'], $file['type'])) {
+            return $file;
+        }
+
+        if (!VUMU_SVG_Sanitizer::sanitize_file($file['tmp_name'])) {
+            $file['error'] = __('Sorry, this SVG file could not be sanitized for security reasons and was not uploaded.', 'viable-url-media-uploader');
+        }
+
+        return $file;
     }
     
     /**

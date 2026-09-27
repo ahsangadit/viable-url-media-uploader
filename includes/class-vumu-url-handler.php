@@ -61,6 +61,22 @@ class VUMU_URL_Handler {
             wp_delete_file($tmp_file);
             return $file_array;
         }
+
+        // Sanitize SVG files before sideloading
+        if (!class_exists(__NAMESPACE__ . '\\VUMU_SVG_Sanitizer')) {
+            require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-svg-sanitizer.php';
+        }
+
+        $mime_type = isset($file_array['type']) ? $file_array['type'] : '';
+        if (VUMU_SVG_Sanitizer::is_svg_file($file_array['tmp_name'], $mime_type)) {
+            if (!VUMU_SVG_Sanitizer::sanitize_file($file_array['tmp_name'])) {
+                wp_delete_file($file_array['tmp_name']);
+                return new \WP_Error(
+                    'svg_sanitization_failed',
+                    __('The SVG file could not be sanitized for security reasons and was not uploaded.', 'viable-url-media-uploader')
+                );
+            }
+        }
         
         // Upload to media library
         $attachment_id = media_handle_sideload($file_array, $post_id);
@@ -189,6 +205,7 @@ class VUMU_URL_Handler {
                     $error_message = __('Server error. The remote server encountered an error. Please try again later.', 'viable-url-media-uploader');
                     break;
                 default:
+                    /* translators: %s: HTTP response code. */
                     $error_message = sprintf(__('HTTP error: %s. Unable to download the file.', 'viable-url-media-uploader'), $response_code);
             }
             

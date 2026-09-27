@@ -8,9 +8,9 @@ Tags: media, upload, media uploader, attachment, url
 
 Requires at least: 5.6.0
 
-Tested up to: 6.9
+Tested up to: 7.1
 
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 Requires PHP: 7.0
 
@@ -46,7 +46,7 @@ Built by **ViableCube**, this plugin is perfect for content creators, developers
 
 * **Multiple File Type Support** – Supports images (JPG, PNG, GIF, WebP, SVG), videos (MP4, WebM), PDFs, and audio files.
 
-* **SVG Support** – Full support for SVG files with proper preview in the media library.
+* **SVG Support** – Full support for SVG files with proper preview in the media library and built-in sanitization for security.
 
 * **Automatic Thumbnail Generation** – Generates thumbnails automatically for uploaded images.
 
@@ -90,7 +90,7 @@ The plugin uses a fallback mechanism to handle servers that block standard brows
 
 = Does it work with SVG files? =
 
-Yes. The plugin includes built-in SVG support, allowing you to upload SVG files and view them properly in the WordPress media library.
+Yes. The plugin includes built-in SVG support with automatic sanitization, allowing you to upload SVG files and view them properly in the WordPress media library.
 
 = Will thumbnails be generated for all images? =  
 
@@ -105,6 +105,12 @@ Yes. The original URL is saved as post meta for each uploaded file, allowing you
 Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Changelog ==
+
+= 1.0.1 – Security Release =
+
+* Fixed authenticated stored XSS vulnerability in SVG file uploads (CVE-2025-14564)
+* Added SVG sanitization on all upload and sideload paths
+* SVG files with unsafe content (scripts, event handlers, etc.) are now blocked
 
 = 1.0.0 – Initial Release =  
 
@@ -127,6 +133,10 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 * Initial stable release  
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+
+Security release. Fixes a stored XSS vulnerability in SVG uploads. Update immediately.
 
 = 1.0.0 =  
 
