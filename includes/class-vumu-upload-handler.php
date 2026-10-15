@@ -14,23 +14,56 @@ if (!defined('ABSPATH')) {
 }
 
 class VUMU_Upload_Handler {
-    
+
+    /**
+     * Transient key for per-user upload error messages.
+     *
+     * @return string
+     */
+    public static function get_error_transient_key() {
+        return 'vumu_upload_error_' . get_current_user_id();
+    }
+
+    /**
+     * Whether the current request is our plugin upload form POST.
+     *
+     * @return bool
+     */
+    private static function is_plugin_upload_request() {
+        global $pagenow;
+
+        if ('upload.php' !== $pagenow) {
+            return false;
+        }
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page slug check.
+        $current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+        if ('vumu-upload-from-url' !== $current_page) {
+            return false;
+        }
+
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Method check only.
+        if (!isset($_SERVER['REQUEST_METHOD']) || 'POST' !== $_SERVER['REQUEST_METHOD']) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Handle form-based upload (non-AJAX)
      *
      * @author Ahsan Gadit
      */
     public static function handle_upload() {
-        global $pagenow;
-        
-        if ('upload.php' !== $pagenow) {
+        if (!self::is_plugin_upload_request()) {
             return;
         }
-        
+
         if (!current_user_can('upload_files')) {
             return;
         }
-        
+
         if (!isset($_POST['vumu_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['vumu_nonce'])), 'vumu_upload_nonce')) {
             return;
         }
@@ -42,7 +75,7 @@ class VUMU_Upload_Handler {
         $url = esc_url_raw(wp_unslash($_POST['vumu_url']));
         
         if (!wp_http_validate_url($url)) {
-            set_transient('vumu_upload_error', __('Invalid URL provided.', 'viable-url-media-uploader'), 30);
+            set_transient(self::get_error_transient_key(), __('Invalid URL provided.', 'viable-url-media-uploader'), 30);
             return;
         }
         
@@ -53,7 +86,7 @@ class VUMU_Upload_Handler {
         $attachment_id = VUMU_URL_Handler::download_and_save($url);
         
         if (is_wp_error($attachment_id)) {
-            set_transient('vumu_upload_error', $attachment_id->get_error_message(), 30);
+            set_transient(self::get_error_transient_key(), $attachment_id->get_error_message(), 30);
             return;
         }
         

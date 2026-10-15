@@ -165,7 +165,7 @@ class VUMU_URL_Handler {
             'filename' => $tmpfname,
             'redirection' => 5,
             'blocking' => true,
-            'sslverify' => false
+            'sslverify' => true,
         ));
         
         $response = wp_safe_remote_get($url, $args);

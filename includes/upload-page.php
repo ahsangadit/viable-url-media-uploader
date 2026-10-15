@@ -12,10 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Correct asset path.
 $vumu_assets_url = plugin_dir_url( dirname( __FILE__ ) ) . 'assets/image/';
 
-$error = get_transient( 'vumu_upload_error' );
+require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-upload-handler.php';
+
+$vumu_error_key = \ahsangadit\viable_url_media_uploader\VUMU_Upload_Handler::get_error_transient_key();
+$error          = get_transient( $vumu_error_key );
 
 if ( $error ) {
-	delete_transient( 'vumu_upload_error' );
+	delete_transient( $vumu_error_key );
 }
 ?>
 

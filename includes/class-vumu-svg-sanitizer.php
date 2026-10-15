@@ -173,7 +173,7 @@ class VUMU_SVG_Sanitizer {
 
         $content = preg_replace('/\s+on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $content);
         $content = preg_replace('/\b(href|xlink:href)\s*=\s*["\']?\s*javascript:[^"\'>\s]*/i', '', $content);
-        $content = preg_replace('/\b(href|xlink:href)\s*=\s*["\']?\s*data:text\/html[^"\'>\s]*/i', '', $content);
+        $content = preg_replace('/\b(href|xlink:href)\s*=\s*["\']?\s*data:[^"\'>\s]*/i', '', $content);
 
         return $content;
     }
@@ -320,7 +320,7 @@ class VUMU_SVG_Sanitizer {
             return true;
         }
 
-        if (0 === strpos($lower_value, 'data:text/html')) {
+        if (0 === strpos($lower_value, 'data:')) {
             return true;
         }
 

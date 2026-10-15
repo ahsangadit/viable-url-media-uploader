@@ -21,6 +21,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!defined('FS_SDK__SSLVERIFY')) {
+    define('FS_SDK__SSLVERIFY', true);
+}
+
 if (!function_exists('vumu_fs')) {
     /**
      * Freemius SDK helper.

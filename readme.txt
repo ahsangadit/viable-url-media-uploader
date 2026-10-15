@@ -111,6 +111,7 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 * Ensures `includes/class-vumu-svg-sanitizer.php` is shipped with the plugin (fixes fatal error on activation in 1.0.1)
 * Loads the SVG sanitizer at plugin bootstrap so all upload paths use the same security module
 * Disables SVG uploads with an admin notice if the sanitizer file is missing, instead of breaking the whole plugin
+* Security hardening: TLS verification for remote URL downloads and Freemius API, scoped upload POST handling, per-user error messages, stricter SVG URL sanitization
 
 = 1.0.1 – Security Release =
 
