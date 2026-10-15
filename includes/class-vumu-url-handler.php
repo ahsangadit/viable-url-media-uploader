@@ -62,13 +62,16 @@ class VUMU_URL_Handler {
             return $file_array;
         }
 
-        // Sanitize SVG files before sideloading
-        if (!class_exists(__NAMESPACE__ . '\\VUMU_SVG_Sanitizer')) {
-            require_once VUMU_PLUGIN_DIR . 'includes/class-vumu-svg-sanitizer.php';
-        }
-
         $mime_type = isset($file_array['type']) ? $file_array['type'] : '';
-        if (VUMU_SVG_Sanitizer::is_svg_file($file_array['tmp_name'], $mime_type)) {
+        if (self::is_svg_upload($file_array['tmp_name'], $mime_type)) {
+            if (!defined('VUMU_SVG_SANITIZER_AVAILABLE') || !VUMU_SVG_SANITIZER_AVAILABLE) {
+                wp_delete_file($file_array['tmp_name']);
+                return new \WP_Error(
+                    'svg_sanitizer_unavailable',
+                    __('SVG uploads are unavailable because the plugin security module is missing. Please reinstall the plugin.', 'viable-url-media-uploader')
+                );
+            }
+
             if (!VUMU_SVG_Sanitizer::sanitize_file($file_array['tmp_name'])) {
                 wp_delete_file($file_array['tmp_name']);
                 return new \WP_Error(
@@ -314,6 +317,26 @@ class VUMU_URL_Handler {
         return '.jpg';
     }
     
+    /**
+     * Determine whether an upload is an SVG file.
+     *
+     * @param string $file_path Temporary file path.
+     * @param string $mime_type   MIME type when known.
+     * @return bool
+     */
+    private static function is_svg_upload($file_path, $mime_type = '') {
+        if (defined('VUMU_SVG_SANITIZER_AVAILABLE') && VUMU_SVG_SANITIZER_AVAILABLE) {
+            return VUMU_SVG_Sanitizer::is_svg_file($file_path, $mime_type);
+        }
+
+        $extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+        if (in_array($extension, array('svg', 'svgz'), true)) {
+            return true;
+        }
+
+        return 'image/svg+xml' === $mime_type;
+    }
+
     /**
      * Get mime type from extension
      *
