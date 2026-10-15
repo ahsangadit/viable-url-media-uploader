@@ -238,8 +238,12 @@ class Viable_URL_Media_Uploader {
             $fs->_enqueue_connect_essentials();
         }
 
-        $vars = array('id' => $fs->get_id());
-        echo $fs->apply_filters('templates/connect.php', fs_get_template('connect.php', $vars));
+        $vars           = array('id' => $fs->get_id());
+        $connect_markup = $fs->apply_filters('templates/connect.php', fs_get_template('connect.php', $vars));
+
+        // Freemius SDK connect screen markup (same output as Freemius::_connect_page_render()).
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo $connect_markup;
 
         return true;
     }
