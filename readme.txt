@@ -10,7 +10,7 @@ Requires at least: 5.6.0
 
 Tested up to: 7.1
 
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 Requires PHP: 7.0
 
@@ -106,6 +106,11 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Changelog ==
 
+= 1.0.3 – 2026-10-16 =
+
+* Ships `includes/class-vumu-svg-sanitizer.php` in the plugin package (fixes incomplete WordPress.org 1.0.2 deploy and restores SVG XSS protection)
+* Syncs plugin header and `VUMU_VERSION` with stable tag 1.0.3
+
 = 1.0.2 – 2026-10-15 =
 
 * Ensures `includes/class-vumu-svg-sanitizer.php` is shipped with the plugin (fixes fatal error on activation in 1.0.1)
@@ -140,6 +145,10 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 * Initial stable release  
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+
+Includes the missing SVG sanitizer file required for secure SVG uploads. Update immediately if you see the “missing SVG security module” admin notice.
 
 = 1.0.2 =
 

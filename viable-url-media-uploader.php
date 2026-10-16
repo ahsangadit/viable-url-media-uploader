@@ -6,7 +6,7 @@
  * Author URI: https://github.com/ahsangadit
  * Text Domain: viable-url-media-uploader
  * Domain Path: /languages
- * Version: 1.0.2
+ * Version: 1.0.3
  * Description: Add media files from URL directly to your WordPress media library with a simple input field and button in the media modal.
  * Requires at least: 5.6.0
  * Requires PHP: 7.0
@@ -81,7 +81,7 @@ if (!function_exists('vumu_fs')) {
     do_action('vumu_fs_loaded');
 }
 
-define('VUMU_VERSION', '1.0.2');
+define('VUMU_VERSION', '1.0.3');
 define('VUMU_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('VUMU_PLUGIN_URL', plugin_dir_url(__FILE__));
 
