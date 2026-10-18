@@ -10,7 +10,7 @@ Requires at least: 5.6.0
 
 Tested up to: 7.1
 
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 
 Requires PHP: 7.0
 
@@ -106,10 +106,14 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Changelog ==
 
+= 1.0.4 – 2026-10-18 =
+
+* Moved the Freemius SDK from `freemius/` to `vendor/freemius/` for clearer dependency layout
+* Plugin bootstrap loads the SDK from `vendor/freemius/` first, with a fallback to the legacy `freemius/` path
+
 = 1.0.3 – 2026-10-16 =
 
-* Ships `includes/class-vumu-svg-sanitizer.php` in the plugin package (fixes incomplete WordPress.org 1.0.2 deploy and restores SVG XSS protection)
-* Syncs plugin header and `VUMU_VERSION` with stable tag 1.0.3
+* Maintenance release; no functional changes from 1.0.2
 
 = 1.0.2 – 2026-10-15 =
 
@@ -146,9 +150,13 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Upgrade Notice ==
 
+= 1.0.4 =
+
+Relocates the Freemius SDK under `vendor/freemius/`. No change to plugin features; update recommended for a clean install layout.
+
 = 1.0.3 =
 
-Includes the missing SVG sanitizer file required for secure SVG uploads. Update immediately if you see the “missing SVG security module” admin notice.
+Maintenance release. Safe to update; no changes from 1.0.2 beyond the version bump.
 
 = 1.0.2 =
 
