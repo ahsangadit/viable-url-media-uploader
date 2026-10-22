@@ -8,9 +8,9 @@ Tags: media, upload, media uploader, attachment, url
 
 Requires at least: 5.6.0
 
-Tested up to: 6.9
+Tested up to: 7.1
 
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 Requires PHP: 7.0
 
@@ -106,6 +106,35 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Changelog ==
 
+= 1.1.0 – 2026-10-22 =
+
+* Rebranded admin upload experience with improved layout and accessibility
+* Added Media Library tab on the upload page for quick navigation
+* Bundled Inter and IBM Plex Mono fonts locally (no third-party font CDN)
+* Freemius SDK ships in the plugin `freemius/` folder; bootstrap loads `freemius/start.php` directly (no `vendor/` directory)
+* Maintains SVG sanitization and security hardening from 1.0.1–1.0.4 (CVE-2025-14564)
+
+= 1.0.4 – 2026-10-18 =
+
+* Maintenance and packaging updates for the Freemius SDK integration
+
+= 1.0.3 – 2026-10-16 =
+
+* Maintenance release; no functional changes from 1.0.2
+
+= 1.0.2 – 2026-10-15 =
+
+* Ensures `includes/class-vumu-svg-sanitizer.php` is shipped with the plugin (fixes fatal error on activation in 1.0.1)
+* Loads the SVG sanitizer at plugin bootstrap so all upload paths use the same security module
+* Disables SVG uploads with an admin notice if the sanitizer file is missing, instead of breaking the whole plugin
+* Security hardening: TLS verification for remote URL downloads and Freemius API, scoped upload POST handling, per-user error messages, stricter SVG URL sanitization
+
+= 1.0.1 – Security Release =
+
+* Fixed authenticated stored XSS vulnerability in SVG file uploads (CVE-2025-14564)
+* Added SVG sanitization on all upload and sideload paths
+* SVG files with unsafe content (scripts, event handlers, etc.) are now blocked
+
 = 1.0.0 – Initial Release =  
 
 * Added URL-based media upload functionality  
@@ -128,6 +157,26 @@ Yes. The plugin works in both single-site and multisite WordPress installations.
 
 == Upgrade Notice ==
 
+= 1.1.0 =
+
+Security and UI update: includes SVG XSS protections (CVE-2025-14564) and a refreshed upload admin experience. Update recommended.
+
+= 1.0.4 =
+
+Maintenance release for Freemius SDK packaging. No change to plugin features.
+
+= 1.0.3 =
+
+Maintenance release. Safe to update; no changes from 1.0.2 beyond the version bump.
+
+= 1.0.2 =
+
+Fixes plugin activation when the SVG sanitizer file was missing from the 1.0.1 package. Keeps SVG XSS protections from 1.0.1.
+
+= 1.0.1 =
+
+Security release. Fixes a stored XSS vulnerability in SVG uploads. Update immediately.
+
 = 1.0.0 =  
 
 First stable release of **Viable URL Media Uploader** — import media files directly from URLs into your WordPress media library without downloading them first.
@@ -144,4 +193,4 @@ We'd love to hear your feedback and suggestions!
 
 📩 Email: [ahsan@viablecube.com](mailto:ahsan@viablecube.com)  
 
-🌐 Website: [https://viablecube.com](https://viablecube.com)
+🌐 Website: [https://vumu.viablecube.com/](https://vumu.viablecube.com/)

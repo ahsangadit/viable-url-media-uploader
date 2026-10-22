@@ -29,7 +29,14 @@ class VUMU_Footer_Boxes {
 					'title'       => __( 'Need Help?', 'viable-url-media-uploader' ),
 					'description' => __( 'Having trouble uploading files? Our support team is ready to help you resolve any issues quickly.', 'viable-url-media-uploader' ),
 					'button_text' => __( 'Get Support', 'viable-url-media-uploader' ),
-					'button_url'  => 'https://viablecube.com/support/?utm_source=vumu&utm_medium=plugin-footer&utm_campaign=support',
+					'button_url'  => add_query_arg(
+						array(
+							'utm_source'   => 'vumu',
+							'utm_medium'   => 'plugin-footer',
+							'utm_campaign' => 'support',
+						),
+						vumu_marketing_site_url( 'support.html' )
+					),
 					'class'       => 'vumu-footer-support',
 				),
 				array(
@@ -37,7 +44,14 @@ class VUMU_Footer_Boxes {
 					'title'       => __( 'Feature Request', 'viable-url-media-uploader' ),
 					'description' => __( 'Have an idea to improve this plugin? We would love to hear your suggestions and feature requests.', 'viable-url-media-uploader' ),
 					'button_text' => __( 'Request a Feature', 'viable-url-media-uploader' ),
-					'button_url'  => 'https://viablecube.com/feature-request/?utm_source=vumu&utm_medium=plugin-footer&utm_campaign=feature-request',
+					'button_url'  => add_query_arg(
+						array(
+							'utm_source'   => 'vumu',
+							'utm_medium'   => 'plugin-footer',
+							'utm_campaign' => 'feature-request',
+						),
+						vumu_marketing_site_url( 'support.html' )
+					),
 					'class'       => 'vumu-footer-feature',
 				),
 				array(
@@ -57,7 +71,7 @@ class VUMU_Footer_Boxes {
 		?>
 		<div class="vumu-sidebar-section">
 			<?php foreach ( $boxes as $box ) : ?>
-				<div class="vumu-sidebar-box <?php echo esc_attr( $box['class'] ?? '' ); ?>">
+				<div class="vumu-sidebar-box vumu-surface-card <?php echo esc_attr( $box['class'] ?? '' ); ?>">
 					<div class="vumu-sidebar-icon"><?php echo esc_html( $box['icon'] ?? '' ); ?></div>
 					<h3><?php echo esc_html( $box['title'] ?? '' ); ?></h3>
 					<p><?php echo esc_html( $box['description'] ?? '' ); ?></p>

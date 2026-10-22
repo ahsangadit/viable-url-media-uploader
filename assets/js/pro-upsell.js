@@ -1,18 +1,26 @@
 (function () {
 	'use strict';
 
-	var upsellBtn = document.querySelector('.vumu-pro-upsell-add-btn');
-
-	if (!upsellBtn || !window.vumuProUpsell) {
-		return;
+	function openUpgrade(url) {
+		var target = url || (window.vumuProUpsell && window.vumuProUpsell.upgradeUrl);
+		if (target) {
+			window.open(target, '_blank', 'noopener,noreferrer');
+		}
 	}
 
-	upsellBtn.addEventListener('click', function (event) {
-		event.preventDefault();
-		event.stopPropagation();
+	var upsellBtn = document.querySelector('.vumu-pro-upsell-add-btn');
+	if (upsellBtn) {
+		upsellBtn.addEventListener('click', function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			openUpgrade();
+		});
+	}
 
-		if (window.vumuProUpsell.upgradeUrl) {
-			window.open(window.vumuProUpsell.upgradeUrl, '_blank', 'noopener,noreferrer');
-		}
+	document.querySelectorAll('.vumu-pro-upsell-import-btn').forEach(function (btn) {
+		btn.addEventListener('click', function (event) {
+			event.preventDefault();
+			openUpgrade(btn.getAttribute('data-vumu-upgrade-url'));
+		});
 	});
 })();

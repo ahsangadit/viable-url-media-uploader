@@ -1,46 +1,94 @@
 /**
- * Admin Styles for Viable URL Media Uploader
+ * Admin styles — VUMU website theme (polished upload page)
  */
 
-/* ---------- Global Colors ---------- */
 :root {
-    --vumu-gradient: linear-gradient(90deg, #0073aa, #00d4c5);
-    --vumu-dark: #0073aa;
-    --vumu-light: #00d4c5;
+  --vumu-bg: #fafaf6;
+  --vumu-accent: #c5f564;
+  --vumu-accent-dark: #3f682e;
+  --vumu-ink: #191c18;
+  --vumu-muted: #62675e;
+  --vumu-border: #dddfd6;
+  --vumu-surface: #f0f1ea;
+  --vumu-pro-border: #8bac64;
+  --vumu-space: 8px;
+  --vumu-radius: 16px;
+  --vumu-radius-sm: 8px;
+  --vumu-shadow: 0 20px 48px -8px rgba(36, 50, 29, 0.08);
+  --vumu-shadow-sm: 0 6px 20px rgba(36, 50, 29, 0.05);
+  --vumu-dark: var(--vumu-accent-dark);
+  --vumu-light: var(--vumu-accent);
+  --vumu-gradient: var(--vumu-accent);
 }
 
-/* ---------- Global Layout ---------- */
+/* Page canvas */
 .media_page_vumu-upload-from-url {
-	background: linear-gradient(135deg, #e8faff 0%, #f5fbff 100%);
+  background: linear-gradient(180deg, #fff 0%, var(--vumu-bg) 120px, var(--vumu-bg) 100%);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: var(--vumu-ink);
 }
-/* ---------- Header ---------- */
+
+.media_page_vumu-upload-from-url .wrap.vumu-admin {
+  margin: 0;
+  max-width: 1120px;
+}
+
+/* Admin bar offsets */
+body.admin-bar .vumu-sidebar {
+  top: calc(32px + 46px);
+}
+
+@media screen and (max-width: 782px) {
+  body.admin-bar .vumu-sidebar {
+    top: calc(46px + 46px);
+  }
+}
+
+/* Header */
 .vumu-header {
-    text-align: center;
-    margin-bottom: 40px;
-    margin-top: 40px;
+  text-align: center;
+  margin: calc(var(--vumu-space) * 4) 0 calc(var(--vumu-space) * 3);
+}
+
+.vumu-header-eyebrow {
+  margin: 0 0 calc(var(--vumu-space) * 1.5);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vumu-muted);
 }
 
 .vumu-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(var(--vumu-space) * 1.5);
+  flex-wrap: wrap;
 }
 
-.vumu-logo h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #0b2545;
+.vumu-logo-mark {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
 }
 
-/* ---------- Page Layout (main + sidebar) ---------- */
+.vumu-logo-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--vumu-ink);
+  letter-spacing: -0.02em;
+}
+
+/* Layout */
 .vumu-page-layout {
   display: flex;
   align-items: flex-start;
-  gap: 28px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px 40px;
+  gap: calc(var(--vumu-space) * 3.5);
+  padding: 0 calc(var(--vumu-space) * 2.5) calc(var(--vumu-space) * 5);
 }
 
 .vumu-main-content {
@@ -49,381 +97,448 @@
 }
 
 .vumu-sidebar {
-  width: 300px;
+  width: 280px;
   flex-shrink: 0;
   position: sticky;
   top: 46px;
-  padding-top: 30px;
+  align-self: flex-start;
 }
 
-/* ============================
-   Upload Box Styling
-============================ */
-.vumu-upload-box {
-  max-width: none;
-  margin: 30px 0 0;
+/* Shared surface card */
+.vumu-surface-card {
   background: #fff;
-  border-radius: 10px;
-  padding: 40px 50px;
-  position: relative;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--vumu-border);
+  border-radius: var(--vumu-radius);
+  box-shadow: var(--vumu-shadow-sm);
 }
 
-/* Gradient border */
-.vumu-upload-box::before {
+/* Upload card */
+.vumu-upload-box {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--vumu-shadow);
+}
+
+.vumu-upload-box__header {
+  padding: 0 calc(var(--vumu-space) * 4) calc(var(--vumu-space) * 2);
+  border-bottom: 1px solid var(--vumu-border);
+  background: #fff;
+}
+
+.vumu-media-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--vumu-space) * 3);
+  margin: 0 calc(var(--vumu-space) * -4);
+  padding: 0 calc(var(--vumu-space) * 4);
+  border-bottom: 1px solid var(--vumu-border);
+  background: var(--vumu-surface);
+}
+
+.vumu-media-tab {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: -1px;
+  padding: calc(var(--vumu-space) * 1.75) calc(var(--vumu-space) * 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vumu-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.vumu-media-tab:hover {
+  color: var(--vumu-ink);
+}
+
+.vumu-media-tab.is-active {
+  color: var(--vumu-ink);
+  border-bottom-color: var(--vumu-accent-dark);
+  cursor: default;
+}
+
+.vumu-upload-box-heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: calc(var(--vumu-space) * 1.5);
+  flex-wrap: wrap;
+  padding-top: calc(var(--vumu-space) * 3);
+}
+
+.vumu-upload-box h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--vumu-ink);
+  text-align: left;
+}
+
+.vumu-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: var(--vumu-accent);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--vumu-ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vumu-upload-box__notices {
+  padding: calc(var(--vumu-space) * 2) calc(var(--vumu-space) * 4) 0;
+}
+
+.vumu-upload-box__body {
+  padding: calc(var(--vumu-space) * 3) calc(var(--vumu-space) * 4);
+}
+
+.vumu-upload-box__footer {
+  padding: 0 calc(var(--vumu-space) * 4) calc(var(--vumu-space) * 4);
+  margin-top: calc(var(--vumu-space) * 1);
+}
+
+/* Form field */
+.vumu-field {
+  max-width: 100%;
+}
+
+.vumu-field-label {
+  display: block;
+  margin-bottom: calc(var(--vumu-space) * 1);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vumu-ink);
+}
+
+.vumu-input-wrap {
+  position: relative;
+}
+
+.vumu-input-wrap::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 10px;
-  padding: 1.5px;
-  background: var(--vumu-gradient);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%2362675e' stroke-width='2' stroke-linecap='round' d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath stroke='%2362675e' stroke-width='2' stroke-linecap='round' d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") center no-repeat;
   pointer-events: none;
+  opacity: 0.85;
 }
 
-/* Title */
-.vumu-upload-box h3,
-.vumu-upload-box h2 {
-  text-align: center;
-  color: var(--vumu-dark);
-  font-weight: 800;
-  margin-bottom: 25px;
-  font-size: 26px;
-  background: linear-gradient(to right, #0073AA 0%, #00D4C5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
-}
-
-/* Hide label column */
-.vumu-upload-box .form-table th {
-  display: none;
-}
-
-.vumu-upload-box .form-table td {
-  display: block;
-  text-align: center;
-}
-
-/* Input Field */
+.vumu-url-input,
 .vumu-upload-box input#vumu-url-input {
+  display: block;
   width: 100%;
-  max-width: 750px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  border: 2px solid transparent;
-      background: linear-gradient(#e9e9e9, #e9e9e9) padding-box, var(--vumu-gradient) border-box;
-  outline: none;
-  transition: all 0.3s ease;
+  box-sizing: border-box;
+  padding: 12px 16px 12px 44px;
+  border-radius: var(--vumu-radius-sm);
+  border: 1px solid var(--vumu-border);
+  background: var(--vumu-bg);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 14px;
-  color: #333;
-  text-align: center;
+  color: var(--vumu-ink);
+  text-align: left;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.vumu-url-input:focus,
 .vumu-upload-box input#vumu-url-input:focus {
-  box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.15);
+  border-color: var(--vumu-pro-border);
+  box-shadow: 0 0 0 3px rgba(197, 245, 100, 0.35);
 }
 
-/* Description */
+.vumu-field-hint,
 .vumu-upload-box .description {
-  text-align: center;
-  margin-top: 6px;
-  font-size: 13px;
-  color: #666;
-  font-style: italic;
+  margin: calc(var(--vumu-space) * 1) 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--vumu-muted);
+  font-style: normal;
+  text-align: left;
 }
 
-/* Submit Button */
-.vumu-upload-box .submit {
-  text-align: center;
-  margin-top: 25px;
-}
-
+/* Submit */
+.vumu-upload-box__footer #vumu-upload-btn,
 #vumu-upload-btn {
-  background: var(--vumu-gradient);
-  border: none;
-  color: #fff;
-  padding: 14px 0;
+  display: block;
   width: 100%;
-  max-width: 750px;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
+  max-width: 100%;
+  margin: 0;
+  padding: 14px 24px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--vumu-radius-sm) !important;
+  background: var(--vumu-accent) !important;
+  color: var(--vumu-ink) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#vumu-upload-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 115, 170, 0.3);
+.vumu-upload-box__footer #vumu-upload-btn:hover,
+.vumu-upload-box__footer #vumu-upload-btn:focus,
+#vumu-upload-btn:hover,
+#vumu-upload-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(36, 50, 29, 0.12) !important;
+  background: var(--vumu-accent) !important;
+  color: var(--vumu-ink) !important;
 }
 
-/* ---------- Custom Messages ---------- */
+/* Messages */
 .vumu-message {
   display: flex;
   align-items: flex-start;
-  gap: 15px;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px 0;
+  gap: calc(var(--vumu-space) * 1.5);
+  padding: calc(var(--vumu-space) * 2);
+  border-radius: var(--vumu-radius-sm);
+  margin: 0 0 calc(var(--vumu-space) * 2);
   font-size: 14px;
   line-height: 1.5;
-  position: relative;
-  overflow: hidden;
 }
 
-.vumu-message::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--vumu-gradient);
+.vumu-message-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.vumu-message-icon--success {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%233f682e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+.vumu-message-icon--error {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23991b1b' stroke-width='2' stroke-linecap='round' d='M12 8v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3C/svg%3E");
 }
 
 .vumu-message-error {
-  background: linear-gradient(135deg, #fff5f5 0%, #fef2f2 100%);
+  background: #fff5f5;
   border: 1px solid #fecaca;
   color: #991b1b;
 }
 
 .vumu-message-success {
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-  border: 1px solid #bbf7d0;
-  color: #166534;
-}
-
-.vumu-message-icon {
-  font-size: 20px;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.vumu-message-content {
-  flex: 1;
+  background: #f4f9ef;
+  border: 1px solid #c5e0a8;
+  color: var(--vumu-accent-dark);
 }
 
 .vumu-message-content strong {
   display: block;
   font-weight: 600;
-  margin-bottom: 5px;
-  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .vumu-message-content p {
   margin: 0;
-  line-height: 1.5;
 }
 
- 
-/* ---------- Info Section ---------- */
+/* Info cards */
 .vumu-info-section {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 30px;
-  max-width: none;
-  margin: 40px 0 0;
+  gap: calc(var(--vumu-space) * 3);
+  margin-top: calc(var(--vumu-space) * 4);
 }
 
-/* ---------- Cards ---------- */
 .vumu-card {
-  flex: 1 1 300px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 25px 30px;
-  position: relative;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.25s ease;
-}
-
-/* Gradient border (same for all) */
-.vumu-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 2px;
-  background: var(--vumu-gradient);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  flex: 1 1 280px;
+  padding: calc(var(--vumu-space) * 3) calc(var(--vumu-space) * 3.5);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .vumu-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: var(--vumu-shadow);
 }
 
-/* ---------- Icon Circle ---------- */
 .vumu-icon-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--vumu-gradient);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--vumu-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 8px rgba(0, 115, 170, 0.25);
+  margin-bottom: calc(var(--vumu-space) * 1.5);
 }
 
-/* ---------- Card Text ---------- */
+.vumu-icon-circle img {
+  width: 26px;
+  height: 26px;
+}
+
 .vumu-card h3 {
-  color: #000;
-  text-align: left;
+  margin: 0 0 calc(var(--vumu-space) * 1.5);
+  font-size: 17px;
   font-weight: 600;
-  font-size: 22px;
-  margin-bottom: 12px;
+  color: var(--vumu-ink);
+  text-align: left;
 }
 
-.vumu-card p,
-.vumu-card li {
-  font-size: 14px;
-  color: #000;
-  line-height: 1.6;
-  font-weight: 500;
+.vumu-card-lead {
+  margin: 0 0 calc(var(--vumu-space) * 1.5);
+  font-size: 13px;
+  color: var(--vumu-muted);
+  line-height: 1.5;
+}
+
+.vumu-steps {
   margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: vumu-step;
 }
 
-.vumu-card ul {
-  margin-top: 10px;
-  padding-left: 0;
+.vumu-steps li {
+  position: relative;
+  padding-left: calc(var(--vumu-space) * 4);
+  margin-bottom: calc(var(--vumu-space) * 1.5);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--vumu-muted);
+  counter-increment: vumu-step;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
-  .vumu-page-layout {
-    flex-direction: column;
-    padding: 0 10px 40px;
-  }
-
-  .vumu-sidebar {
-    width: 100%;
-    position: static;
-  }
-
-  .vumu-sidebar-section {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .vumu-sidebar-box {
-    flex: 1 1 260px;
-  }
+.vumu-steps li::before {
+  content: counter(vumu-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--vumu-surface);
+  border: 1px solid var(--vumu-border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vumu-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .vumu-upload-box {
-    padding: 25px;
-  }
-
-  .vumu-info-section {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .vumu-sidebar-section {
-    flex-direction: column;
-  }
-
-  .vumu-sidebar-box {
-    flex: 1 1 100%;
-  }
+.vumu-type-chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* ---------- Sidebar Boxes ---------- */
+.vumu-type-chips li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(var(--vumu-space) * 1);
+  margin-bottom: calc(var(--vumu-space) * 1.25);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--vumu-muted);
+}
+
+.vumu-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--vumu-surface);
+  border: 1px solid var(--vumu-border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vumu-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Sidebar */
 .vumu-sidebar-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: calc(var(--vumu-space) * 2);
 }
 
 .vumu-sidebar-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  position: relative;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.25s ease;
-}
-
-.vumu-sidebar-box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 2px;
-  background: var(--vumu-gradient);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  padding: calc(var(--vumu-space) * 2.75) calc(var(--vumu-space) * 2.5);
+  min-height: 168px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .vumu-sidebar-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 115, 170, 0.12);
+  transform: translateY(-2px);
+  box-shadow: var(--vumu-shadow);
 }
 
 .vumu-sidebar-icon {
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
-  margin-bottom: 10px;
+  margin-bottom: calc(var(--vumu-space) * 1);
 }
 
 .vumu-sidebar-box h3 {
-  color: #0b2545;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 calc(var(--vumu-space) * 1);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vumu-ink);
 }
 
 .vumu-sidebar-box p {
+  flex: 1;
+  margin: 0 0 calc(var(--vumu-space) * 1.75);
   font-size: 12px;
-  color: #555;
   line-height: 1.5;
-  margin: 0 0 14px;
+  color: var(--vumu-muted);
 }
 
 .vumu-sidebar-btn {
   display: inline-block;
-  background: var(--vumu-gradient);
-  color: #fff !important;
-  text-decoration: none;
+  margin-top: auto;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: var(--vumu-radius-sm);
+  background: var(--vumu-accent);
+  color: var(--vumu-ink) !important;
   font-size: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .vumu-sidebar-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 115, 170, 0.3);
-  color: #fff !important;
+  color: var(--vumu-ink) !important;
+  box-shadow: 0 6px 16px rgba(36, 50, 29, 0.1);
 }
 
-/* ---------- Pro Upsell (Free) ---------- */
+/* Pro upsell */
 .vumu-pro-upsell {
-  max-width: 750px;
-  margin: 20px auto 0;
-  padding-top: 18px;
-  border-top: 1px dashed rgba(0, 115, 170, 0.2);
+  margin-top: calc(var(--vumu-space) * 3);
+  padding-top: calc(var(--vumu-space) * 2.25);
+  border-top: 1px dashed var(--vumu-border);
 }
 
 .vumu-pro-upsell-preview {
-  margin-bottom: 14px;
+  margin-bottom: calc(var(--vumu-space) * 1.75);
   opacity: 0.55;
-  filter: grayscale(30%);
   pointer-events: none;
-  user-select: none;
 }
 
 .vumu-pro-upsell-row {
@@ -439,139 +554,121 @@
   gap: 8px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--vumu-dark);
+  color: var(--vumu-ink);
 }
 
 .vumu-pro-upsell-row-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--vumu-gradient);
+  background: var(--vumu-accent-dark);
   color: #fff;
   font-size: 11px;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .vumu-pro-upsell-input {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px 16px;
-  border-radius: 6px;
-  border: 2px dashed #ccc;
-  background: #f3f3f3;
+  border-radius: var(--vumu-radius-sm);
+  border: 2px dashed var(--vumu-border);
+  background: var(--vumu-surface);
+  color: var(--vumu-muted);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 14px;
-  color: #999;
-  text-align: center;
+  text-align: left;
 }
 
 .vumu-pro-upsell-actions {
-  text-align: center;
-  margin-bottom: 10px;
+  text-align: left;
+  margin-bottom: calc(var(--vumu-space) * 1);
 }
 
 .vumu-pro-upsell-add-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f8fafc;
-  border: 2px dashed #94a3b8;
-  color: #64748b;
   padding: 10px 20px;
-  border-radius: 6px;
+  border: 2px dashed var(--vumu-border);
+  border-radius: var(--vumu-radius-sm);
+  background: #fff;
+  color: var(--vumu-muted);
   font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.vumu-pro-upsell-add-btn[aria-disabled="true"] {
   cursor: pointer;
 }
 
 .vumu-pro-upsell-add-icon {
   position: relative;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
 }
 
 .vumu-pro-upsell-pulse-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: var(--vumu-gradient);
-  opacity: 0.35;
+  background: var(--vumu-accent);
+  opacity: 0.45;
   animation: vumu-pro-pulse 1.8s ease-out infinite;
 }
 
 .vumu-pro-upsell-plus {
   position: relative;
   z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--vumu-gradient);
+  background: var(--vumu-accent-dark);
   color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   font-weight: 700;
-  line-height: 1;
   animation: vumu-pro-bounce 1.8s ease-in-out infinite;
 }
 
 @keyframes vumu-pro-pulse {
-  0% {
-    transform: scale(0.85);
-    opacity: 0.5;
-  }
-  70% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
+  0% { transform: scale(0.85); opacity: 0.5; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
 }
 
 @keyframes vumu-pro-bounce {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.12);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
 }
 
 .vumu-pro-upsell-badge {
-  display: inline-block;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-  color: #78350f;
+  background: var(--vumu-accent);
+  color: var(--vumu-ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  font-weight: 600;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 5px;
   margin-left: 4px;
+  text-transform: uppercase;
 }
 
 .vumu-pro-upsell-message {
-  text-align: center;
-  font-size: 13px;
-  color: #555;
   margin: 0;
+  font-size: 13px;
   line-height: 1.6;
+  color: var(--vumu-muted);
+  text-align: left;
 }
 
 .vumu-pro-upsell-message a {
-  color: var(--vumu-dark);
+  color: var(--vumu-accent-dark);
   font-weight: 600;
   text-decoration: none;
 }
@@ -581,17 +678,246 @@
 }
 
 .vumu-pro-upsell:hover .vumu-pro-upsell-add-btn {
-  border-color: var(--vumu-dark);
-  color: var(--vumu-dark);
-  box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.1);
+  border-color: var(--vumu-pro-border);
+  color: var(--vumu-accent-dark);
 }
 
-/* ---------- Hide Admin Notices from Other Plugins ---------- */
-.media_page_vumu-upload-from-url .notice:not(.vumu-message):not(.vumu-message-error):not(.vumu-message-success):not(.vumu-message-warning):not(.vumu-message-info),
-.media_page_vumu-upload-from-url .notice-error:not(.vumu-message-error),
-.media_page_vumu-upload-from-url .notice-success:not(.vumu-message-success),
-.media_page_vumu-upload-from-url .notice-warning:not(.vumu-message-warning),
-.media_page_vumu-upload-from-url .notice-info:not(.vumu-message-info),
+.vumu-media-tab-pro-badge {
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--vumu-accent);
+  color: var(--vumu-ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+/* URL imports tab — free preview (mirrors Pro log layout) */
+.vumu-pro-import-upsell {
+  padding: 20px 24px 28px;
+}
+
+.vumu-pro-import-upsell__lead {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--vumu-muted);
+  text-align: left;
+}
+
+.vumu-pro-import-upsell__preview {
+  position: relative;
+  margin-bottom: calc(var(--vumu-space) * 2.5);
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.vumu-pro-import-upsell__preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(180deg, transparent 40%, rgba(255, 255, 255, 0.85) 100%);
+  pointer-events: none;
+}
+
+.vumu-import-log__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--vumu-border);
+  border-radius: 8px;
+}
+
+.vumu-import-log__table {
+  margin: 0;
+  border: none;
+}
+
+.vumu-import-log__table .column-preview {
+  width: 72px;
+}
+
+.vumu-import-log__table .column-source {
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.vumu-import-log__mime {
+  display: block;
+  font-size: 12px;
+  color: var(--vumu-muted);
+}
+
+.vumu-import-log__source-url {
+  word-break: break-all;
+  font-size: 12px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.vumu-import-log__copy {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+.vumu-import-log__time {
+  display: block;
+  font-size: 12px;
+  color: var(--vumu-muted);
+}
+
+.vumu-import-log__muted {
+  color: var(--vumu-muted);
+  font-size: 12px;
+}
+
+.vumu-pro-import-upsell__thumb {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  border: 1px solid var(--vumu-border);
+  background: linear-gradient(135deg, #e8ebe3 0%, #d4d9ce 100%);
+}
+
+.vumu-pro-import-upsell__cta {
+  margin-top: calc(var(--vumu-space) * 0.5);
+  padding: calc(var(--vumu-space) * 3) calc(var(--vumu-space) * 3) calc(var(--vumu-space) * 2.75);
+  text-align: center;
+  border: 1px solid var(--vumu-border);
+  border-radius: var(--vumu-radius-sm);
+  background: linear-gradient(180deg, #fff 0%, var(--vumu-bg) 100%);
+}
+
+.vumu-pro-import-upsell__cta-title {
+  margin: 0 0 calc(var(--vumu-space) * 2);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vumu-accent-dark);
+}
+
+.vumu-pro-import-upsell__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 14px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--vumu-radius-sm);
+  background: var(--vumu-accent);
+  color: var(--vumu-ink);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  box-shadow: var(--vumu-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.15s ease;
+}
+
+.vumu-pro-import-upsell__btn:hover,
+.vumu-pro-import-upsell__btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(36, 50, 29, 0.12);
+  background: #d4f87a;
+  color: var(--vumu-ink);
+  outline: none;
+}
+
+.vumu-pro-import-upsell__btn:focus-visible {
+  outline: 2px solid var(--vumu-accent-dark);
+  outline-offset: 2px;
+}
+
+.vumu-pro-import-upsell__btn-label {
+  flex: 0 1 auto;
+}
+
+.vumu-pro-import-upsell__btn-badge {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: var(--vumu-accent-dark);
+  color: #fff;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+.vumu-pro-import-upsell__cta .vumu-pro-upsell-message {
+  margin: calc(var(--vumu-space) * 2) 0 0;
+  text-align: center;
+  max-width: 36em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .vumu-page-layout {
+    flex-direction: column;
+    padding: 0 calc(var(--vumu-space) * 1.25) calc(var(--vumu-space) * 5);
+  }
+
+  .vumu-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .vumu-sidebar-section {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .vumu-sidebar-box {
+    flex: 1 1 240px;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .vumu-upload-box__header,
+  .vumu-upload-box__body,
+  .vumu-upload-box__footer,
+  .vumu-upload-box__notices {
+    padding-left: calc(var(--vumu-space) * 2.5);
+    padding-right: calc(var(--vumu-space) * 2.5);
+  }
+
+  .vumu-media-tabs {
+    margin-left: calc(var(--vumu-space) * -2.5);
+    margin-right: calc(var(--vumu-space) * -2.5);
+    padding-left: calc(var(--vumu-space) * 2.5);
+    padding-right: calc(var(--vumu-space) * 2.5);
+    gap: calc(var(--vumu-space) * 2);
+  }
+
+  .vumu-media-tab {
+    font-size: 13px;
+  }
+
+  .vumu-upload-box__notices {
+    padding-top: calc(var(--vumu-space) * 2);
+  }
+
+  .vumu-sidebar-section {
+    flex-direction: column;
+  }
+}
+
+/* Hide other plugin notices */
+.media_page_vumu-upload-from-url .notice:not(.vumu-message):not(.vumu-message-error):not(.vumu-message-success),
 .media_page_vumu-upload-from-url .update-nag,
 .media_page_vumu-upload-from-url .updated {
   display: none !important;
